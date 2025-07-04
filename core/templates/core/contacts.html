@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main class="contacts-page">
+        <div class="container">
+            <h2>Свяжитесь с нами</h2>
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <h3>Телефон</h3>
+                    <p><a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
+                </div>
+                <div class="contact-card">
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@merchshop.ru">info@merchshop.ru</a></p>
+                </div>
+                <div class="contact-card">
+                    <h3>Адрес</h3>
+                    <p>Москва, ул. Примерная, д. 10</p>
+                </div>
+                <div class="contact-card">
+                    <h3>Режим работы</h3>
+                    <p>Пн–Пт с 10:00 до 19:00</p>
+                </div>
+            </div>
+
+            <div class="map-wrapper">
+                <h3>Мы на карте</h3>
+                <div id="map" class="map"></div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
+
+{% block extra_scripts %}
+    <!-- Yandex Maps -->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script src="{% static 'js/yamaps.js' %}" type="text/javascript"></script>
+{% endblock %}
+
