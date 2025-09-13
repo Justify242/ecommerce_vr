@@ -1,10 +1,11 @@
-const modal = document.getElementById('modal');
-const openBtn = document.getElementById('openModalBtn');
-const closeBtn = document.getElementById('closeModalBtn');
+document.addEventListener('DOMContentLoaded', () => {
+  const burger = document.querySelector('.burger');
+  const navCenter = document.querySelector('.nav-center');
 
-openBtn.addEventListener('click', () => modal.classList.add('active'));
-closeBtn.addEventListener('click', () => modal.classList.remove('active'));
-
-window.addEventListener('click', (e) => {
-    if (e.target === modal) modal.classList.remove('active');
+  if (burger && navCenter) {
+    burger.addEventListener('click', () => {
+      navCenter.classList.toggle('active');
+      burger.classList.toggle('open'); // для анимации бургер → крестик
+    });
+  }
 });

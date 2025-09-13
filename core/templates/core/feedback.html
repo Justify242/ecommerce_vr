@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <main class="container" style="padding: 1rem;">
+        <h2 style="text-align: center; margin-bottom: 2rem; color: var(--color-primary-dark);">Обратная связь</h2>
+        <div class="calc-card">
+{#            <h3>Обратная связь</h3>#}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn" style="margin-top: 1rem;">Отправить</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}

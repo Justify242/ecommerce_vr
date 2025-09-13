@@ -1,0 +1,427 @@
+@font-face {
+  font-family: 'Inter_18pt';
+  src: url('/static/fonts/Inter_18pt-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter_18pt';
+  src: url('/static/fonts/Inter_18pt-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter_18pt';
+  src: url('/static/fonts/Inter_18pt-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter_18pt';
+  src: url('/static/fonts/Inter_18pt-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter_28pt';
+  src: url('/static/fonts/Inter_28pt-ExtraBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+html {
+  height: 100%;
+  margin: 0;
+  font-size: 16px;
+}
+
+main {
+  flex: 1;
+}
+
+body {
+  /*padding: 10px 60px;*/
+  color: #333;
+  background-color: #fdfdfd;
+  line-height: 1.6;
+  height: 100%;
+  margin: 0 auto;
+  /*max-width: 1400px;*/
+}
+
+section {
+  margin-top: 100px;
+  padding: 25px;
+}
+
+section h1 {
+  font-family: Inter_28pt, sans-serif;
+  font-weight: 800;
+  font-size: 100px;
+  margin: 0;
+}
+
+ul {
+  font-family: Inter_18pt, sans-serif;
+  padding: 5px 25px;
+}
+
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: white;
+  border-bottom: 5px solid black;
+  position: relative;
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+}
+
+.nav-center {
+  display: flex;
+  gap: 36px;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-center a {
+  font-family: Inter_18pt, sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  text-decoration: none;
+  color: black;
+  position: relative;
+}
+
+.nav-center a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background-color: black;
+  transition: width 0.3s ease;
+}
+
+.nav-center a:hover::after {
+  width: 100%;
+}
+
+.order-btn {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 20px 60px;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+/* Бургер скрыт на десктоп */
+.burger {
+  display: none;
+}
+
+.hero {
+  position: relative;
+  bottom: 100px;
+  width: 100%;
+  height: 985px;
+  display: flex;
+  justify-content: center;
+  background-image: url("/static/assets/main.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  max-height: 1100px;
+  max-width: 1400px;
+  object-position: center;
+  z-index: 1;
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 20vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1455px;
+}
+
+.hero-text {
+  font-family: Inter_18pt, sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  color: #0a0a0a;
+  margin-top: 0;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.hero-text .newline {
+  display: block;
+}
+
+.hero-btn {
+  background-color: #0a0a0a;
+  color: white;
+  border: none;
+  padding: 20px 80px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.slogan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 65vh;
+  /*max-height: 35vh;*/
+}
+
+.slogan .slogan-text {
+  font-family: Inter_18pt, sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  color: #0a0a0a;
+  margin-top: 0;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.slogan .slogan-text .newline {
+  display: block;
+}
+
+.about-us {
+  width: 100%;
+  min-height: 65vh;
+  /*max-height: 65vh;*/
+}
+
+.about-us .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 15px;
+  margin-bottom: 50px;
+  min-width: 100%;
+}
+
+.about-us .text {
+  font-family: Inter_18pt, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  max-width: 49%;
+  padding: 10px;
+}
+
+.about-us .text p {
+  margin-top: 10px;
+}
+
+.about-us .card {
+  width: 32%;
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #2f4763;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.about-us .card .card-title {
+  font-family: Inter_18pt, sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.about-us .card .card-content {
+  font-family: Inter_18pt, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.slogan-blue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 65vh;
+  background-color: #2f4763;
+}
+
+.slogan-blue .slogan-blue-text {
+  font-family: Inter_18pt, sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  color: #ffffff;
+  margin-top: 0;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.slogan-blue .slogan-blue-text .newline {
+  display: block;
+}
+
+.cases {
+  padding: 10px 45px;
+  width: 100%;
+  min-height: 65vh;
+}
+
+.catalog {
+  padding: 10px 45px;
+  width: 100%;
+  min-height: 65vh;
+}
+
+.catalog h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.catalog .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-width: 100%;
+}
+
+.catalog .column {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+.catalog .column .text {
+  font-family: Inter_18pt, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 10px;
+}
+
+
+.catalog .column h2 {
+  font-family: Inter_18pt, sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+}
+
+/*@media (max-width: 1679px) {*/
+/*  .hero-content{*/
+/*    width: calc(100% - 5vw);       !* на всю ширину *!*/
+/*    max-width: none;   !* убираем ограничение *!*/
+/*    left: 0;           !* больше не центрируем *!*/
+/*    transform: none;   !* убираем сдвиг *!*/
+/*    padding: 0 ;*/
+/*  }*/
+/*}*/
+
+/*@media (max-width: 1464px) {*/
+/*  .hero-content{*/
+/*    width: 100%;       !* на всю ширину *!*/
+/*    max-width: none;   !* убираем ограничение *!*/
+/*    left: 0;           !* больше не центрируем *!*/
+/*    transform: none;   !* убираем сдвиг *!*/
+/*    padding: 0 ;*/
+/*  }*/
+/*}*/
+
+/* Мобильные */
+@media (max-width: 1199px) {
+  .nav-center {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    z-index: 999;
+    gap: 40px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(-100%); /* изначально скрыто */
+    opacity: 0;
+  }
+
+  .nav-center.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .order-btn {
+    display: block; /* теперь внутри меню */
+  }
+
+  .burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    cursor: pointer;
+    z-index: 1000; /* чтобы была сверху */
+  }
+
+  .burger span {
+    display: block;
+    height: 4px;
+    background-color: black;
+    border-radius: 2px;
+  }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 480px) {
+  .hero {
+    height: 50vh;
+  }
+}

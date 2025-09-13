@@ -1,21 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <main class="product-page">
-        <div class="container product-container">
-            <div class="product-image-large">
-                <img src="https://adgesia.ru/upload/dev2fun.imagecompress/webp/iblock/a6c/a6c5ae4bdea9e64fd2e4c54d0cded362.webp"
-                     alt="Футболка"/>
+    <main class="container" style="padding: 1rem;">
+        <h2 style="text-align: center; margin-bottom: 2rem; color: var(--color-primary-dark);">Калькулятор заказа</h2>
+        <div class="calculator-grid">
+            <!-- Левая карточка -->
+            <div class="calc-card">
+                <h3>Выберите параметры</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ calculator_form.as_p }}
+                    {{ order_form.as_p }}
+                    <button type="submit" class="btn" style="margin-top: 1rem;">Отправить</button>
+                </form>
             </div>
-            <div class="product-details">
-                <h2>Футболка черная</h2>
-                <p class="product-price">₽1 200</p>
-                <p class="product-description">
-                    Универсальная черная футболка из 100% хлопка. Подходит как для повседневного ношения, так и для
-                    активного отдыха.
-                </p>
-                <button class="btn btn-add-to-cart">Добавить в корзину</button>
-            </div>
+
+            <!-- Правая карточка -->
+            {#      <div class="calc-card">#}
+            {#        <h3>Оставьте заявку</h3>#}
+            {#        <form method="post">#}
+            {#          {% csrf_token %}#}
+            {#          #}
+            {#          <button type="submit" class="btn" style="margin-top: 1rem;">Отправить</button>#}
+            {#        </form>#}
+            {#      </div>#}
         </div>
     </main>
 {% endblock %}

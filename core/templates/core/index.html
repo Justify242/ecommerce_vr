@@ -1,55 +1,131 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    <section class="hero">
-        <div class="hero-content">
-            <h2>Новый мерч уже здесь</h2>
-            <p>Футболки, худи и многое другое — стиль и комфорт каждый день</p>
-            <a href="#" class="btn">Смотреть каталог</a>
-            <div class="messengers">
-                <a href="https://t.me/your_username" class="messenger telegram" target="_blank"
-                   aria-label="Telegram"></a>
-                <a href="https://wa.me/79991234567" class="messenger whatsapp" target="_blank"
-                   aria-label="WhatsApp"></a>
-            </div>
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-text">
+        качественно <span class="newline">и под ключ</span>
+      </p>
+      <button class="hero-btn">Заказать</button>
+    </div>
+  </section>
+  <section class="slogan">
+    <div class="slogan-text">
+      АртЦех - Ваш надежный производитель <span class="newline">фирменной продукции</span>
+    </div>
+  </section>
+  <section class="about-us">
+    <h1>о нас</h1>
+    <div class="row">
+      <div class="text">
+        <p>
+          Мы создаём фирменный мерч, деловую атрибутику и рекламные
+          сувениры, помогая компаниям укреплять бренд и корпоративную
+          культуру. Наши решения подходят для бизнесов любого масштаба
+          - от стартапов до крупных компаний.
+        </p>
+        <p>
+          Мы разрабатываем каждое изделие с учётом ваших целей и стиля,
+          чтобы оно не только выглядело презентабельно, но и эффективно
+          представляло Ваш бренж. Будь то одежда для команды или
+          подарки партнёрам - каждая деатль работает на имидж.
+        </p>
+      </div>
+      <div class="text">
+        <p>
+          Благодаря современным технологиям и отлаженным процессам
+          мы оперативно выполняем заказы, в том числе срочные, без
+          потери качества. Сроки - наш приоритет.
+        </p>
+        <p>
+          Мы берем на себя всё: производство, контроль и доставку. Вам
+          не нужно следить за процессом - вы получаете готовую
+          продукцию точно в срок.
+        </p>
+        <p>
+          С нами вы получаете не поставщика, а партнёра, которые
+          заботится о вашем бренде.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card">
+        <div class="card-title">
+          Выбор
         </div>
-    </section>
-    <section class="products">
-        <div class="container">
-            <h2>Популярные товары</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://adgesia.ru/upload/dev2fun.imagecompress/webp/iblock/a6c/a6c5ae4bdea9e64fd2e4c54d0cded362.webp"
-                             alt="Футболка"/>
-                    </div>
-                    <h3>Футболка черная</h3>
-                    <p>₽1 200</p>
-                </div>
-                <!-- другие карточки -->
-            </div>
+        <div class="card-content">
+          Обширный каталог товаров и способов нанесения
         </div>
-    </section>
-    <section class="advantages">
-        <div class="container">
-            <h2>Наши преимущества</h2>
-            <div class="advantages-grid">
-                <div class="advantage-card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1048/1048310.png" alt="Доставка">
-                    <h3>Быстрая доставка</h3>
-                    <p>Доставим заказ за 1–3 дня по всей стране.</p>
-                </div>
-                <div class="advantage-card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/992/992700.png" alt="Качество">
-                    <h3>Гарантия качества</h3>
-                    <p>Используем только проверенные материалы и бренды.</p>
-                </div>
-                <div class="advantage-card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/891/891462.png" alt="Поддержка">
-                    <h3>Поддержка 24/7</h3>
-                    <p>Ответим на любые вопросы в любое время.</p>
-                </div>
-            </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          удобство
         </div>
-    </section>
+        <div class="card-content">
+          Можно выбрать удобный способ оплаты и доставки
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          Качество
+        </div>
+        <div class="card-content">
+          Мы работаем только
+          с проверенными производителями
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="slogan-blue">
+    <div class="slogan-blue-text">
+      Мы делаем все: от создания дизайна<span class="newline">до печати и пошива</span>
+    </div>
+  </section>
+   <section class="cases">
+   <h1>кейсы</h1>
+   </section>
+
+  <section class="catalog">
+    <div class="row">
+      <div class="column">
+        <h1>каталог</h1>
+        <div class="row">
+        <div class="column" style="width: 60%">
+          <h2>Одежда</h2>
+          <ul>
+            <li>Футболки и поло</li>
+            <li>Куртки, бомберы, жилетки</li>
+            <li>Дождевики</li>
+            <li>Бейсболки</li>
+            <li>Шевроны</li>
+          </ul>
+        </div>
+          <div class="column">
+            <h2>Аксессуары</h2>
+            <ul>
+            <li>Футболки и поло</li>
+            <li>Куртки, бомберы, жилетки</li>
+            <li>Дождевики</li>
+            <li>Бейсболки</li>
+            <li>Шевроны</li>
+          </ul>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <h2>Для мероприятий</h2>
+        <ul>
+            <li>Футболки и поло</li>
+            <li>Куртки, бомберы, жилетки</li>
+            <li>Дождевики</li>
+            <li>Бейсболки</li>
+            <li>Шевроны</li>
+          </ul>
+      </div>
+    </div>
+  </section>
 {% endblock %}
+
+
+
