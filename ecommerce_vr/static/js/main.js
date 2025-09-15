@@ -9,3 +9,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("click", () => {
+    const targetId = card.getAttribute("data-target");
+
+    // скрыть весь контент
+    document.querySelectorAll(".tab-content").forEach(tab => {
+      tab.classList.remove("active");
+    });
+
+    // показать нужный
+    document.getElementById(targetId).classList.add("active");
+
+    // показать row-extra
+    document.querySelector(".row-extra").classList.add("active");
+  });
+});
