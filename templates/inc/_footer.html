@@ -1,6 +1,13 @@
-<footer>
-{#    <div class="container footer-content">#}
-{#        <p>MerchShop — это онлайн-типография, где печать становится простой и доступной.</p>#}
-{#        <a href="{% url 'feedback' %}" class="btn btn-contact">Связаться с нами</a>#}
-{#    </div>#}
-</footer>
+{% load static %}
+
+<div class="footer-wrapper">
+  <footer class="site-footer">
+    <div class="footer-content">
+      <img src="{% static 'assets/logo_horizontal.png' %}" alt="Logo" class="footer-logo">
+      <span class="footer-text">
+      <p>ол райтс резервед</p>
+      <p>2025</p>
+    </span>
+    </div>
+  </footer>
+</div>
