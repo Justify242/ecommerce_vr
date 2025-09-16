@@ -3,23 +3,25 @@
 <div class="header-wrapper">
   <header class="site-header">
     <div class="logo">
-      <img src="{% static 'assets/logo_horizontal.png' %}" alt="Мерч"/>
+      <a href="#hero">
+        <img src="{% static 'assets/logo_horizontal.png' %}" alt="Мерч"/>
+      </a>
     </div>
 
     <div class="nav-center">
-      <a href="#">о нас</a>
-      <a href="#">кейсы</a>
-      <a href="#">каталог</a>
-      <a href="#">этапы</a>
-      <a href="#">вопросы</a>
+      <a href="#about-us">о нас</a>
+      <a href="#cases">кейсы</a>
+      <a href="#catalog">каталог</a>
+      <a href="#stages">этапы</a>
+      <a href="#faq">вопросы</a>
+
+      <a href="#order" class="order-btn-burger">Заказать</a>
     </div>
 
-    <button class="order-btn">Заказать</button>
+    <a href="#order" class="order-btn">Заказать</a>
 
     <div class="burger">
-      <span></span>
-      <span></span>
-      <span></span>
+      <img class="burger-icon" src="{% static 'assets/burger.png' %}" alt="burger icon">
     </div>
   </header>
 </div>

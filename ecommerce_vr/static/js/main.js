@@ -1,6 +1,18 @@
+window.addEventListener('load', () => {
+  window.scrollTo(0, 0);
+});
+
 document.addEventListener('DOMContentLoaded', () => {
+
+  /*
+  -------------------
+  Управление бургером
+  -------------------
+  */
+
   const burger = document.querySelector('.burger');
   const navCenter = document.querySelector('.nav-center');
+  const navLinks = document.querySelectorAll('.nav-center a');
 
   if (burger && navCenter) {
     burger.addEventListener('click', () => {
@@ -8,8 +20,100 @@ document.addEventListener('DOMContentLoaded', () => {
       burger.classList.toggle('open'); // для анимации бургер → крестик
     });
   }
-});
 
+  /* Скрытие меню и прокрутка до выбранной секции */
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault(); // предотвращаем стандартный переход
+
+      const targetId = link.getAttribute('href'); // получаем якорь
+      const targetElement = document.querySelector(targetId);
+      const header = document.querySelector('.site-header');
+      const headerHeight = header ? header.offsetHeight + 40 : 0;
+
+      if (targetElement) {
+        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - headerHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+
+      // скрываем меню
+      navCenter.classList.remove('active');
+      burger.classList.remove('open');
+    });
+  });
+
+  /*
+  -------------------
+  Управление появлением текста и кнопки на хиро
+  -------------------
+  */
+
+  const heroText = document.querySelector(".hero-text");
+  const heroBtn = document.querySelector(".hero-btn");
+
+  // можно добавить небольшую задержку для кнопки
+  setTimeout(() => heroText.classList.add("show"), 300);
+  setTimeout(() => heroBtn.classList.add("show"), 300);
+
+  /*
+  -------------------
+  Управление появлением секций и элементов
+  при прокрутке
+  -------------------
+  */
+
+  const sections = document.querySelectorAll("section");
+  const aboutUsCards = document.querySelectorAll(".about-us .card");
+  const technologiesCards = document.querySelectorAll(".technologies .card")
+  const faqCards = document.querySelectorAll(".faq .card-collapse")
+  const timelinePoints = document.querySelectorAll(".timeline .container")
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target); // если нужно один раз
+      }
+    });
+  }, {
+    threshold: 0.2
+  });
+
+  /* Секции */
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+
+  /* Карточки в секции о нас */
+  aboutUsCards.forEach((card, index) => {
+    observer.observe(card);
+    // Задержка для каскадного эффекта
+    card.style.transitionDelay = `${index * 0.2}s`;
+  });
+
+  /* Карточки в секции технологии */
+  technologiesCards.forEach((card, index) => {
+    observer.observe(card);
+    card.style.transitionDelay = `${index * 0.2}s`;
+  });
+
+  /* Карточки в секции часто задаваемые вопросы */
+  faqCards.forEach((card, index) => {
+    observer.observe(card);
+    card.style.transitionDelay = `${index * 0.2}s`;
+  });
+
+  /* Пункты таймлайна */
+  timelinePoints.forEach((card, index) => {
+    observer.observe(card);
+    card.style.transitionDelay = `${index * 0.2}s`;
+  });
+});
 
 document.querySelectorAll(".card").forEach(card => {
   card.addEventListener("click", () => {
@@ -43,4 +147,56 @@ document.querySelectorAll('.card-collapse').forEach(card => {
     card.classList.toggle('expanded');
     icon.src = card.classList.contains('expanded') ? '/static/assets/cross.png' : '/static/assets/cross.png';
   });
+});
+
+ /*
+ -------------------
+ Отправка формы
+ -------------------
+ */
+
+const form = document.getElementById('formOrder');
+const submitBtn = document.getElementById('submitBtn');
+const alertBox = document.getElementById('formAlert');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault(); // отменяем стандартную отправку
+
+  // блокируем кнопку
+  submitBtn.disabled = true;
+
+  // показываем статус "Отправка..."
+  alertBox.style.display = 'block';
+  alertBox.textContent = 'Отправка...';
+  alertBox.className = 'sending';
+
+  // собираем данные формы
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    });
+
+    if (response.ok) {
+      alertBox.textContent = 'Успешно отправлено!';
+      alertBox.className = 'success';
+      form.reset(); // очистить форму
+    } else {
+      alertBox.textContent = 'Ошибка отправки формы';
+      alertBox.className = 'error';
+    }
+  } catch (error) {
+    alertBox.textContent = 'Ошибка сети, попробуйте позже.';
+    alertBox.className = 'error';
+  }
+
+  // разблокируем кнопку через 3 секунды
+  setTimeout(() => {
+    submitBtn.disabled = false;
+  }, 3000);
 });

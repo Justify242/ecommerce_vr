@@ -34,6 +34,14 @@
 }
 
 
+/*:target::before {*/
+/*  content: "";*/
+/*  display: block;*/
+/*  height: 75px; !* высота хедера *!*/
+/*  margin-top: -75px; !* компенсируем хедер *!*/
+/*}*/
+
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -52,7 +60,8 @@ main {
 }
 
 body {
-  color: #333;
+  /*color: #333;*/
+  color: #0a0a0a;
   background-color: #fdfdfd;
   line-height: 1.6;
   height: 100%;
@@ -64,6 +73,14 @@ section {
   width: 100%;
   min-height: 85vh;
   margin-bottom: 25px;
+
+  transform: translateY(50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+section.show {
+  opacity: 1;
+  transform: translateY(0); /* возвращаем */
 }
 
 section h1 {
@@ -130,7 +147,7 @@ ul {
   justify-content: space-between;
   padding: 10px 0;
   background-color: white;
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid #0a0a0a;
   position: relative;
 }
 
@@ -152,7 +169,7 @@ ul {
   font-weight: 600;
   font-size: 32px;
   text-decoration: none;
-  color: black;
+  color: #0a0a0a;
   position: relative;
 }
 
@@ -163,7 +180,7 @@ ul {
   bottom: 0;
   width: 0;
   height: 3px;
-  background-color: black;
+  background-color: #0a0a0a;
   transition: width 0.3s ease;
 }
 
@@ -172,18 +189,39 @@ ul {
 }
 
 .order-btn {
-  background-color: black;
+  font-family: Inter_18pt, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+
+  background-color: #0a0a0a;
   color: white;
   border: none;
   padding: 20px 60px;
-  font-size: 16px;
-  font-weight: 400;
+
   cursor: pointer;
   border-radius: 7px;
+  text-decoration: none;
+}
+
+.order-btn-burger {
+  font-family: Inter_18pt, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+
+  display: none;
+  background-color: #0a0a0a;
+  color: white;
+  border: none;
+  padding: 20px 60px;
+
+  cursor: pointer;
+  border-radius: 7px;
+  text-decoration: none;
 }
 
 .burger {
   display: none;
+  margin-right: 10px;
 }
 
 .footer-wrapper {
@@ -193,10 +231,10 @@ ul {
 
 .site-footer {
   background-color: white; /* цвет футера */
-  color: black;
+  color: #0a0a0a;
   padding: 10px 0;
   position: relative;
-  border-top: 5px solid black;
+  border-top: 5px solid #0a0a0a;
   font-family: Inter_18pt, sans-serif;
 }
 
@@ -218,10 +256,15 @@ ul {
   font-family: Inter_18pt, sans-serif;
 }
 
+.hero-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .hero {
   position: relative;
   bottom: 100px;
-  width: 100%;
+  width: 85%;
   height: 985px;
   display: flex;
   justify-content: center;
@@ -229,7 +272,7 @@ ul {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  margin-top: 150px;
+  margin: 150px auto 0 auto;
 }
 
 .hero img {
@@ -261,6 +304,10 @@ ul {
   margin-top: 0;
   margin-bottom: 10px;
   line-height: 1.2;
+
+  opacity: 0;
+  transform: translateX(-50px); /* немного снизу */
+  transition: all 0.6s ease-out;
 }
 
 .hero-text .newline {
@@ -275,6 +322,16 @@ ul {
   font-size: 16px;
   cursor: pointer;
   border-radius: 7px;
+
+  opacity: 0;
+  transform: translateX(50px); /* немного снизу */
+  transition: all 0.6s ease-out;
+}
+
+.hero-text.show,
+.hero-btn.show {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .slogan {
@@ -339,6 +396,15 @@ ul {
   align-items: center;
   justify-content: center;
   padding: 20px;
+
+  opacity: 0;
+  transform: translateX(-50px); /* сдвигаем влево */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.about-us .card.show {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .about-us .card .card-title {
@@ -386,49 +452,30 @@ ul {
 }
 
 .catalog {
-  min-height: 65vh;
+  min-height: 45vh;
 }
 
 .catalog h1 {
+  line-height: 1;
   margin-top: 0;
-  margin-bottom: 0;
-  padding: 0;
 }
-
-/*.catalog .row {*/
-/*  display: flex;*/
-/*  justify-content: space-between;*/
-/*  align-items: flex-start;*/
-/*  min-width: 100%;*/
-/*}*/
-
-/*.catalog .column {*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  width: 45%;*/
-/*}*/
 
 .catalog .row {
   display: flex;
-  flex-wrap: wrap; /* перенос колонок */
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
   width: 100%;
 }
 
-/* Все колонки по умолчанию (десктоп) */
 .catalog .row .column {
   display: flex;
   flex-direction: column;
-  width: 45%;
+  width: 40%;
 }
 
-
-.catalog .column .text {
-  font-family: Inter_18pt, sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  padding: 10px;
+.catalog .column:last-child {
+  align-items: end;
 }
 
 .catalog .column h2 {
@@ -437,9 +484,15 @@ ul {
   font-size: 40px;
 }
 
-.catalog .column:last-child {
-  padding: 40px;
-  align-items: end
+.catalog .column .text {
+  font-family: Inter_18pt, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 10px;
+}
+
+.catalog .section-content {
+  margin-top: 0;
 }
 
 .technologies {
@@ -508,7 +561,14 @@ ul {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(-50px); /* сдвигаем влево */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.technologies .card.show {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .technologies .row .card.active {
@@ -554,7 +614,16 @@ ul {
 
 .container {
   position: relative;
-  margin: 10px 0;
+  margin-top: 20px;
+  line-height: 1.3;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.container.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .container::before {
@@ -563,29 +632,26 @@ ul {
   width: 12px;
   height: 12px;
   left: -49px;
-  top: 22px;
   background-color: white;
   border: 2px solid #2f4763;
   border-radius: 50%;
-}
+  transform: translateY(-50%);
+  top: 50%;
 
-.container:last-child {
-  margin-bottom: 0;
 }
 
 .container:last-child::before {
   background-color: #2f4763;
   border-color: #2f4763;
-  top: 25px;
 }
 
 .content {
-  padding-top: 10px;
   background-color: white;
   border-radius: 6px;
   font-family: Inter_18pt, sans-serif;
   font-weight: 400;
   font-size: 16px;
+  display: inline-block;
 }
 
 .order {
@@ -597,10 +663,8 @@ ul {
 }
 
 .order .form-order .form-item {
-  /*margin-top: 20px;*/
   margin-bottom: 60px;
 }
-
 
 .order .form-order .form-item .control {
   border: none;
@@ -610,26 +674,56 @@ ul {
   font-family: Inter_18pt, sans-serif;
   font-weight: 700;
   font-size: 24px;
-
-  /* Для select убираем верхний/нижний padding */
   padding: 10px 0;
-  height: auto; /* или min-height: 40px; */
+  height: auto;
   background-color: white;
-  appearance: none; /* убираем нативный стиль */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
 .order .form-order .form-item input:focus {
   outline: none;
-  border-bottom: 2px solid #2f4763; /* или оставить border, если нужен */
+  border-bottom: 2px solid #2f4763;
 }
-
 
 .order .form-order .form-item label {
   font-family: Inter_18pt, sans-serif;
   font-weight: 700;
   font-size: 24px;
+}
+
+#formAlert {
+  display: none;
+  padding: 25px 20px;
+  border-radius: 8px;
+  font-family: Inter_18pt, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+/* Статус отправки */
+#formAlert.sending {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+/* Статус успеха */
+#formAlert.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* Статус ошибки */
+#formAlert.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
 }
 
 .faq {
@@ -646,8 +740,15 @@ ul {
   align-items: center;
   justify-content: flex-start;
   padding: 20px;
-  transition: height 0.3s ease;
   margin-bottom: 15px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.faq .card-collapse.show {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .faq .card-collapse .card-title {
@@ -692,14 +793,13 @@ ul {
   transform: rotate(0deg);
 }
 
-/* Контент коллапса */
 .faq .card-collapse .card-content {
   font-family: Inter_18pt, sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: #ffffff;
   text-align: left;
-  max-height: 0; /* скрыт по умолчанию */
+  max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease, padding 0.3s ease;
   width: 100%;
@@ -707,7 +807,7 @@ ul {
 }
 
 .card-collapse.expanded .card-content {
-  max-height: 500px; /* достаточно для контента */
+  max-height: 500px;
   padding: 20px 0;
 }
 
@@ -737,11 +837,20 @@ ul {
   font-family: Inter_18pt, sans-serif;
   font-weight: 500;
   font-size: 24px;
-  color: black;
+  color: #0a0a0a;
 }
 
-
 @media (max-width: 1199px) {
+
+  .header-wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .footer-wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 
   .nav-center {
     position: fixed;
@@ -766,6 +875,10 @@ ul {
   }
 
   .order-btn {
+    display: none;
+  }
+
+  .order-btn-burger {
     display: block;
   }
 
@@ -774,27 +887,35 @@ ul {
     flex-direction: column;
     justify-content: space-between;
     width: 30px;
-    height: 22px;
+    height: auto;
     cursor: pointer;
     z-index: 1000;
   }
 
-  .burger span {
-    display: block;
-    height: 4px;
-    background-color: black;
-    border-radius: 2px;
+  .hero {
+    margin: 70px auto 0 auto;
+    max-width: 93%;
   }
 
-  .catalog .row .column {
-    width: 48%; /* две колонки сверху */
+  .hero-content {
+    bottom: 21vh;
+  }
+
+  .catalog .row .column:first-child {
+    width: 100%;
+  }
+
+  .catalog .row .column:first-child .row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 20px;
   }
 
   .catalog .row .column:last-child {
-    width: 100%; /* третья колонка под ними */
-    margin-top: 20px;
+    width: 100%;
+    align-items: flex-start;
     padding: 0;
-    align-items: start
   }
 
   .catalog .row .column h2 {
@@ -816,26 +937,15 @@ ul {
     width: 100% !important;
   }
 
- .technologies .row-extra.active {
-    padding: 0px;
-}
-
-  /*.tab-content.active {*/
-  /*  flex-direction: column !important;*/
-  /*  justify-content: flex-start !important;*/
-  /*  align-items: stretch;*/
-  /*}*/
-
-  /*.tab-content .column {*/
-  /*  width: 100% !important;*/
-  /*}*/
+  .technologies .row-extra.active {
+    padding: 0;
+  }
 }
 
 
 @media (max-width: 769px) {
   section {
     padding: 5px 10px;
-
   }
 
   section h1 {
@@ -858,57 +968,58 @@ ul {
   }
 
   .footer-logo {
-    height: 20px;
+    height: 40px;
     width: auto;
   }
 
+  .footer-content p {
+    font-size: 20px;
+  }
+
+  .hero {
+    max-height: 75vh;
+    margin: 70px auto 0 auto;
+    max-width: 93%;
+  }
+
   .hero-content {
-    flex-direction: column; /* текст сверху, кнопка под ним */
-    align-items: center; /* центрируем по горизонтали */
-    bottom: 10vh; /* чуть выше, можно регулировать */
+    flex-direction: column;
+    align-items: center;
+    bottom: 10vh;
+    width: 100%;
   }
 
   .hero-btn {
-    width: 90%; /* кнопка почти на всю ширину */
-    max-width: 300px; /* можно ограничить, чтобы не растягивалась слишком */
-    margin-top: 40px; /* отступ между текстом и кнопкой */
-    padding: 15px 0; /* вертикальные паддинги, горизонтальные растягиваем кнопкой */
+    width: 100%;
+    max-width: 300px;
+    margin-top: 40px;
+    padding: 15px 0;
   }
 
   .hero-text {
-    font-size: 28px; /* уменьшаем размер текста на мобильных */
+    font-size: 28px;
     text-align: center;
   }
 
   .about-us .row {
-    flex-direction: column; /* колонки выстраиваются в столбец */
-    align-items: center; /* выравнивание карточек по центру */
+    flex-direction: column;
+    align-items: center;
   }
 
   .about-us .card {
-    width: 100%; /* каждая карточка занимает всю ширину */
-    /*max-width: 400px; !* необязательно, чтобы не было слишком широких карточек *!*/
+    width: 100%;
   }
 
   .about-us .text {
     max-width: 100%;
   }
 
-  .catalog .row {
-    width: 100%;
-  }
-
-  .catalog .column {
-    width: 100%;
-  }
-
   .catalog .row .column {
-    width: 100%; /* две колонки сверху */
+    width: 100%;
   }
 
   .catalog .row .column:last-child {
-    width: 100%; /* третья колонка под ними */
-    margin-top: 20px;
+    width: 100%;
   }
 
   .technologies .row {
@@ -917,8 +1028,8 @@ ul {
   }
 
   .technologies .card {
-    width: 48%; /* две карточки в ряд */
-    margin-bottom: 10px; /* отступ снизу */
+    width: 48%;
+    margin-bottom: 10px;
   }
 
   .technologies .row-extra h2 {
@@ -936,17 +1047,21 @@ ul {
     width: 100% !important;
   }
 
- .technologies .row-extra.active {
-    padding: 0px;
-}
+  .technologies .row-extra.active {
+    padding: 0;
+  }
 
   .timeline {
-    padding-left: 20px; /* линия ближе к краю */
+    padding-left: 20px;
     border-left: 2px solid #2f4763;
   }
 
+  .stages .section-content {
+    padding-left: 20px;
+  }
+
   .timeline h4 {
-    font-size: 20px;
+    font-size: 15px;
   }
 
   .container {
@@ -954,24 +1069,18 @@ ul {
   }
 
   .container::before {
-    left: -30px; /* кружок ближе к линии */
+    left: -30px;
     width: 14px;
     height: 14px;
-    top: 16px;
   }
 
   .content {
-    font-size: 14px; /* немного меньше текст */
-    /*padding: 8px;*/
-  }
-
-  .content h4:last-child {
-    margin-top: 11px;
-    line-height: 1;
+    font-size: 14px;
+    line-height: 1.1;
   }
 
   .stages h3 {
-     font-weight: 500;
+    font-weight: 500;
     font-size: 28px;
   }
 
@@ -982,11 +1091,5 @@ ul {
   .faq h3 {
     font-weight: 500;
     font-size: 28px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero {
-    height: 50vh;
   }
 }

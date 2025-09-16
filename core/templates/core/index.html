@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block content %}
-  <section class="hero">
+
+  <section id="hero" class="hero">
     <div class="hero-content">
       <p class="hero-text">
         качественно <span class="newline">и под ключ</span>
@@ -11,13 +12,13 @@
     </div>
   </section>
 
-  <section class="slogan">
+  <section id="slogan" class="slogan">
     <div class="slogan-text">
       АртЦех - Ваш надежный производитель <span class="newline">фирменной продукции</span>
     </div>
   </section>
-  <section class="about-us">
 
+  <section id="about-us" class="about-us">
     <h1>о нас</h1>
     <div class="section-content">
       <div class="row">
@@ -82,25 +83,24 @@
     </div>
   </section>
 
-  <section class="slogan-blue">
+  <section id="slogan-blue" class="slogan-blue">
     <div class="slogan-blue-text">
       Мы делаем все: от создания дизайна<span class="newline">до печати и пошива</span>
     </div>
   </section>
 
-  <section class="cases">
+  <section id="cases" class="cases">
     <h1>кейсы</h1>
     <div class="section-content">
     </div>
   </section>
 
-  <section class="catalog">
+  <section id="catalog" class="catalog">
     <div class="section-content">
       <div class="row">
         <div class="column">
           <h1 style="margin-bottom: 25px">каталог</h1>
           <div class="row">
-{#            <div class="column" style="width: 60%">#}
             <div class="column">
               <h2 style="margin-bottom: 15px">Одежда</h2>
               <ul>
@@ -123,7 +123,6 @@
             </div>
           </div>
         </div>
-{#        <div class="column" style="padding: 40px; align-items: end">#}
         <div class="column">
           <h2 style="margin-bottom: 15px">Для мероприятий</h2>
           <ul>
@@ -146,7 +145,7 @@
     </div>
   </section>
 
-  <section class="technologies">
+  <section id="technologies" class="technologies">
     <h1>технологии нанесения</h1>
     <div class="section-content">
       <div class="row">
@@ -214,7 +213,7 @@
     </div>
   </section>
 
-  <section class="stages">
+  <section id="stages" class="stages">
     <h1>этапы</h1>
     <h3>формирования заказа</h3>
     <div class="section-content">
@@ -225,9 +224,7 @@
             <p>
               В течение 2-х часов после заполнения заявки с вами свяжется менеджер
               для уточнения деталей.
-              <span class="newline">
-          В будни с 10:00 до 19:00 по МСК.
-        </span>
+              <span class="newline">В будни с 10:00 до 19:00 по МСК.</span>
             </p>
           </div>
         </div>
@@ -240,7 +237,10 @@
         <div class="container">
           <div class="content">
             <h4>Подготовка макета</h4>
-            <p>При необходимости возможно привлечение дизайнера к редактированию вашего макета под требования ТЗ.</p>
+            <p>
+              При необходимости возможно привлечение дизайнера к
+              редактированию вашего макета под требования ТЗ.
+            </p>
           </div>
         </div>
         <div class="container">
@@ -258,17 +258,17 @@
         <div class="container">
           <div class="content">
             <h4>Изготовление заказа и доставка</h4>
-          <p></p>
+            {#            <p></p>#}
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="order">
+  <section id="order" class="order">
     <h1>заказать</h1>
     <div class="section-content">
-      <form class="form-order">
+      <form id="formOrder" class="form-order" action="/new-order/" method="post">
         <div class="form-item">
           <input class="control" id="fullname" name="fullname">
           <label for="fullname">Ваше имя</label>
@@ -291,13 +291,13 @@
           <input class="control" id="count" type="number" min="0" name="count">
           <label for="count">Тираж</label>
         </div>
-
-        <button type="submit" class="order-btn">Отправить</button>
+        <button type="submit" id="submitBtn" class="order-btn">Отправить</button>
       </form>
+      <div id="formAlert" style="display:none; margin-top:25px;"></div>
     </div>
   </section>
 
-  <section class="faq">
+  <section id="faq" class="faq">
     <h1>ответы</h1>
     <h3>на часто задаваемые вопросы</h3>
     <div class="section-content">
@@ -359,7 +359,7 @@
     </div>
   </section>
 
-  <section class="contacts">
+  <section id="contacts" class="contacts">
     <h1>контакты</h1>
     <div class="section-content">
       <div class="contacts-container">
