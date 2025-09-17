@@ -28,7 +28,6 @@ DEBUG = config.DEBUG
 
 ALLOWED_HOSTS = config.ALLOWED_HOSTS
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sitemaps",
     "extra_settings",
     "core.apps.CoreConfig",
+    "huey.contrib.djhuey",
     "ckeditor"
 ]
 
@@ -148,6 +148,7 @@ MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+CSRF_TRUSTED_ORIGINS = config.CSRF_TRUSTED_ORIGINS
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -177,6 +178,16 @@ EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 
 DEFAULT_FROM_EMAIL = f"МЕРЧ <{EMAIL_HOST_USER}>"
 
+HUEY = {
+    'name': 'art_worker',
+    'utc': True,
+    'immediate': False,
+    'connection': {
+        'host': config.REDIS_HOST,
+        'port': config.REDIS_PORT,
+        'db': 0,
+    },
+}
 
 EXTRA_SETTINGS_ADMIN_APP = "extra_settings"
 EXTRA_SETTINGS_CACHE_NAME = "extra_settings"

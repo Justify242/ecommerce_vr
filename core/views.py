@@ -8,8 +8,8 @@ from core.models import Technology, FaqItem
 
 
 def index(request):
-    technologies = Technology.objects.order_by("name")
-    faq_items = FaqItem.objects.order_by("title")
+    technologies = Technology.objects.order_by("id")
+    faq_items = FaqItem.objects.order_by("id")
 
     form = OrderForm()
     context = {

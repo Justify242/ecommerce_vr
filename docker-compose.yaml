@@ -13,6 +13,7 @@ services:
 
   core:
     image: justify242/art-core:latest
+    container_name: core
     entrypoint: [ "/bin/bash", "entrypoint.sh" ]
     volumes:
       - /opt/share/media:/app/media
@@ -22,3 +23,23 @@ services:
       - "8000:8000"
     networks:
       - webnet
+
+  redis:
+    image: redis:latest
+    networks:
+      - webnet
+
+  huey:
+    image: justify242/art-core:latest
+    container_name: huey
+    entrypoint: [ "python", "manage.py", "run_huey" ]
+    volumes:
+      - /opt/share/media:/app/media
+      - /opt/share/static:/app/static
+      - /opt/share/.env:/app/.env
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
