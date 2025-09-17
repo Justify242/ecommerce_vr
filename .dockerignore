@@ -1,0 +1,22 @@
+# Исключаем стандартные папки и файлы
+venv/
+*/venv/
+node_modules/
+*/node_modules/
+*.pyc
+__pycache__/
+*.log
+*.sqlite3
+.DS_Store
+
+# Исключаем конфигурационные файлы IDE и редакторов
+.vscode/
+.idea/
+*.swp
+
+nginx.conf
+docker-compose.yaml
+
+# Исключаем сборочные артефакты
+build/
+dist/
