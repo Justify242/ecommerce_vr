@@ -293,7 +293,7 @@ ul {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1450px;
+  max-width: 1590px;
 }
 
 .hero-text {
@@ -1012,6 +1012,10 @@ ul {
 
   .about-us .text {
     max-width: 100%;
+  }
+
+  .catalog .row {
+    flex-direction: column; /* главное правило */
   }
 
   .catalog .row .column {
