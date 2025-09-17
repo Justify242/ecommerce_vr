@@ -149,68 +149,94 @@
     <h1>технологии нанесения</h1>
     <div class="section-content">
       <div class="row">
-        <div class="card active" data-target="content-1">
-          <div class="card-content">
-            Шелкография
+        {% for technology in technologies %}
+          <div class="card {% if forloop.counter == 1 %}active{% endif %}" data-target="{{ technology.slug }}">
+            <div class="card-content">
+              {{ technology.name }}
+            </div>
           </div>
-        </div>
-        <div class="card" data-target="content-2">
-          <div class="card-content">
-            Сублимация
-          </div>
-        </div>
-        <div class="card" data-target="content-3">
-          <div class="card-content">
-            Флексопечать
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-content">
-            Тиснение
-          </div>
-        </div>
+        {% endfor %}
       </div>
-      <div class="row">
-        <div class="card">
-          <div class="card-content">
-            Вышивка
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-content">
-            DTF-Печать
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-content">
-            Цифровая и УФ-печать
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-content">
-            Лазерная гравировка
-          </div>
-        </div>
-      </div>
+
       <div class="row-extra active">
-        <div id="content-1" class="tab-content active">
-          <div class="column">
-            <h2>Шелкография</h2>
+        {% for technology in technologies %}
+          <div id="{{ technology.slug }}" class="tab-content {% if forloop.counter == 1 %}active{% endif %}">
+            <div class="column">
+              <h2>{{ technology.name }}</h2>
+            </div>
+            <div class="column">
+              {{ technology.description|safe }}
+            </div>
           </div>
-          <div class="column">
-            Чернила передаются на поверхность через щаблон (шёлк или другой материал)
-            <span class="newline">
-          - может быть использован для нанесения на различные поверхности: текстиль, пластик, металл и т.д.
-          </span>
-            <span class="newline">
-          - некоторые особо мелкие детали может быть трудно воспроизвести
-          </span>
-          </div>
-        </div>
-        <div id="content-2" class="tab-content">test2</div>
-        <div id="content-3" class="tab-content">test2</div>
+        {% endfor %}
       </div>
     </div>
+
+    {#      <div class="row">#}
+    {#        <div class="card active" data-target="content-1">#}
+    {#          <div class="card-content">#}
+    {#            Шелкография#}
+    {#          </div>#}
+    {#        </div>#}
+    {#        <div class="card" data-target="content-2">#}
+    {#          <div class="card-content">#}
+    {#            Сублимация#}
+    {#          </div>#}
+    {#        </div>#}
+    {#        <div class="card" data-target="content-3">#}
+    {#          <div class="card-content">#}
+    {#            Флексопечать#}
+    {#          </div>#}
+    {#        </div>#}
+    {#        <div class="card">#}
+    {#          <div class="card-content">#}
+    {#            Тиснение#}
+    {#          </div>#}
+    {#        </div>#}
+    {#      </div>#}
+    {#      <div class="row">#}
+    {#        <div class="card">#}
+    {#          <div class="card-content">#}
+    {#            Вышивка#}
+    {#          </div>#}
+    {#        </div>#}
+    {#        <div class="card">#}
+    {#          <div class="card-content">#}
+    {#            DTF-Печать#}
+    {#          </div>#}
+    {#        </div>#}
+    {#        <div class="card">#}
+    {#          <div class="card-content">#}
+    {#            Цифровая и УФ-печать#}
+    {#          </div>#}
+    {#        </div>#}
+    {#        <div class="card">#}
+    {#          <div class="card-content">#}
+    {#            Лазерная гравировка#}
+    {#          </div>#}
+    {#        </div>#}
+    {#      </div>#}
+
+
+    {#      <div class="row-extra active">#}
+    {#        <div id="content-1" class="tab-content active">#}
+    {#          <div class="column">#}
+    {#            <h2>Шелкография</h2>#}
+    {#          </div>#}
+    {#          <div class="column">#}
+    {#            Чернила передаются на поверхность через щаблон (шёлк или другой материал)#}
+    {#            <span class="newline">#}
+    {#          - может быть использован для нанесения на различные поверхности: текстиль, пластик, металл и т.д.#}
+    {#          </span>#}
+    {#            <span class="newline">#}
+    {#          - некоторые особо мелкие детали может быть трудно воспроизвести#}
+    {#          </span>#}
+    {#          </div>#}
+    {#        </div>#}
+    {#        <div id="content-2" class="tab-content">test2</div>#}
+    {#        <div id="content-3" class="tab-content">test2</div>#}
+    {#      </div>#}
+    {#    </div>#}
   </section>
 
   <section id="stages" class="stages">
@@ -269,26 +295,21 @@
     <h1>заказать</h1>
     <div class="section-content">
       <form id="formOrder" class="form-order" action="/new-order/" method="post">
+        {% csrf_token %}
         <div class="form-item">
-          <input class="control" id="fullname" name="fullname">
+          {{ form.full_name }}
           <label for="fullname">Ваше имя</label>
         </div>
         <div class="form-item">
-          <input class="control" id="contact" name="contact">
+          {{ form.contact }}
           <label for="contact">Телефон, почта, ник в Telegram</label>
         </div>
         <div class="form-item">
-          <select class="control" id="productType" name="productType">
-            <option value="test">test</option>
-            <option value="test">test</option>
-            <option value="test">test</option>
-            <option value="test">test</option>
-            <option value="test">test</option>
-          </select>
+          {{ form.product_type }}
           <label for="productType">Тип изделия</label>
         </div>
         <div class="form-item">
-          <input class="control" id="count" type="number" min="0" name="count">
+          {{ form.count }}
           <label for="count">Тираж</label>
         </div>
         <button type="submit" id="submitBtn" class="order-btn">Отправить</button>
@@ -301,61 +322,77 @@
     <h1>ответы</h1>
     <h3>на часто задаваемые вопросы</h3>
     <div class="section-content">
-      <div class="card-collapse">
-        <div class="card-title">
-          Какой минимальный объем заказа?
-          <button class="collapse-btn">
-            <img src="{% static 'assets/cross.png' %}" alt="toggle" class="icon">
-          </button>
+      {% for faq_item in faq_items %}
+        <div class="card-collapse">
+          <div class="card-title">
+            {{ faq_item.title }}
+            <button class="collapse-btn">
+              <img src="{% static 'assets/cross.png' %}" alt="toggle" class="icon">
+            </button>
+          </div>
+          <div class="card-content">
+            <p>{{ faq_item.text|safe }}</p>
+          </div>
         </div>
-        <div class="card-content">
-          <p>Это подробная информация, которая будет скрыта или показана при нажатии кнопки.</p>
-        </div>
-      </div>
-      <div class="card-collapse">
-        <div class="card-title">
-          Как узнать стоимость и объемы производства?
-          <button class="collapse-btn">
-            <img src="{% static 'assets/cross.png' %}" alt="toggle" class="icon">
-          </button>
-        </div>
-        <div class="card-content">
-          <p>Это подробная информация, которая будет скрыта или показана при нажатии кнопки.</p>
-        </div>
-      </div>
-      <div class="card-collapse">
-        <div class="card-title">
-          Какие есть способы оплаты?
-          <button class="collapse-btn">
-            <img src="{% static 'assets/cross.png' %}" alt="toggle" class="icon">
-          </button>
-        </div>
-        <div class="card-content">
-          <p>Это подробная информация, которая будет скрыта или показана при нажатии кнопки.</p>
-        </div>
-      </div>
-      <div class="card-collapse">
-        <div class="card-title">
-          Когда необходимо оплатить заказ?
-          <button class="collapse-btn">
-            <img src="{% static 'assets/cross.png' %}" alt="toggle" class="icon">
-          </button>
-        </div>
-        <div class="card-content">
-          <p>Это подробная информация, которая будет скрыта или показана при нажатии кнопки.</p>
-        </div>
-      </div>
-      <div class="card-collapse">
-        <div class="card-title">
-          Как мне получить заказ?
-          <button class="collapse-btn">
-            <img src="{% static 'assets/cross.png' %}" alt="toggle" class="icon">
-          </button>
-        </div>
-        <div class="card-content">
-          <p>Это подробная информация, которая будет скрыта или показана при нажатии кнопки.</p>
-        </div>
-      </div>
+      {% endfor %}
+
+      {#      <div class="card-collapse">#}
+      {#        <div class="card-title">#}
+      {#          Какой минимальный объем заказа?#}
+      {#          <button class="collapse-btn">#}
+      {#            <img src="{% static 'assets/cross.png' %}" alt="toggle" class="icon">#}
+      {#          </button>#}
+      {#        </div>#}
+      {#        <div class="card-content">#}
+      {#          <p>Это подробная информация, которая будет скрыта или показана при нажатии кнопки.</p>#}
+      {#        </div>#}
+      {#      </div>#}
+      {#      #}
+      {#      #}
+      {#      <div class="card-collapse">#}
+      {#        <div class="card-title">#}
+      {#          Как узнать стоимость и объемы производства?#}
+      {#          <button class="collapse-btn">#}
+      {#            <img src="{% static 'assets/cross.png' %}" alt="toggle" class="icon">#}
+      {#          </button>#}
+      {#        </div>#}
+      {#        <div class="card-content">#}
+      {#          <p>Это подробная информация, которая будет скрыта или показана при нажатии кнопки.</p>#}
+      {#        </div>#}
+      {#      </div>#}
+      {#      <div class="card-collapse">#}
+      {#        <div class="card-title">#}
+      {#          Какие есть способы оплаты?#}
+      {#          <button class="collapse-btn">#}
+      {#            <img src="{% static 'assets/cross.png' %}" alt="toggle" class="icon">#}
+      {#          </button>#}
+      {#        </div>#}
+      {#        <div class="card-content">#}
+      {#          <p>Это подробная информация, которая будет скрыта или показана при нажатии кнопки.</p>#}
+      {#        </div>#}
+      {#      </div>#}
+      {#      <div class="card-collapse">#}
+      {#        <div class="card-title">#}
+      {#          Когда необходимо оплатить заказ?#}
+      {#          <button class="collapse-btn">#}
+      {#            <img src="{% static 'assets/cross.png' %}" alt="toggle" class="icon">#}
+      {#          </button>#}
+      {#        </div>#}
+      {#        <div class="card-content">#}
+      {#          <p>Это подробная информация, которая будет скрыта или показана при нажатии кнопки.</p>#}
+      {#        </div>#}
+      {#      </div>#}
+      {#      <div class="card-collapse">#}
+      {#        <div class="card-title">#}
+      {#          Как мне получить заказ?#}
+      {#          <button class="collapse-btn">#}
+      {#            <img src="{% static 'assets/cross.png' %}" alt="toggle" class="icon">#}
+      {#          </button>#}
+      {#        </div>#}
+      {#        <div class="card-content">#}
+      {#          <p>Это подробная информация, которая будет скрыта или показана при нажатии кнопки.</p>#}
+      {#        </div>#}
+      {#      </div>#}
     </div>
   </section>
 

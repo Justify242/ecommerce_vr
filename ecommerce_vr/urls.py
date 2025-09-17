@@ -20,6 +20,11 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
+    path("jet/", include("jet.urls", "jet")),  # основные стили
+    path("jet/dashboard/", include("jet.dashboard.urls", "jet-dashboard")),
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
