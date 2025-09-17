@@ -183,11 +183,11 @@ form.addEventListener('submit', async (e) => {
     });
 
     if (response.ok) {
-      alertBox.textContent = 'Успешно отправлено!';
+      alertBox.textContent = 'Ваша заявка успешно отправлена. В ближайшее время с Вами свяжется наш оператор.';
       alertBox.className = 'success';
-      form.reset(); // очистить форму
+      form.reset();
     } else {
-      alertBox.textContent = 'Ошибка отправки формы';
+      alertBox.textContent = 'Ошибка отправки формы.';
       alertBox.className = 'error';
     }
   } catch (error) {

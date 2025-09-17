@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
+import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / "subdir".
@@ -23,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-u^4zgcry*om89b6$rchb=ryh%jonhf(37$i*q6s+lffu2&qa=a"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config.DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config.ALLOWED_HOSTS
 
 
 # Application definition
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "extra_settings",
     "core.apps.CoreConfig",
     "ckeditor"
 ]
@@ -77,12 +79,24 @@ WSGI_APPLICATION = "ecommerce_vr.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": config.DB_NAME,
+            "USER": config.DB_USER,
+            "PASSWORD": config.DB_PASS,
+            "HOST": config.DB_HOST,
+            "PORT": config.DB_PORT,
+        }
+    }
 
 
 # Password validation
@@ -109,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "ru-ru"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -125,8 +139,70 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "ecommerce_vr/static"),
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+        'toolbar_Full': [
+            ['Format', 'FontSize'],
+            ['Bold', 'Italic', 'Underline', 'Strike'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
+            ['Blockquote'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Image', 'Table', 'HorizontalRule'],
+            ['RemoveFormat', 'Source'],
+        ],
+        'height': 400,
+        'width': '100%',
+    }
+}
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = config.EMAIL_HOST
+EMAIL_PORT = config.EMAIL_PORT
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = config.EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
+
+DEFAULT_FROM_EMAIL = f"МЕРЧ <{EMAIL_HOST_USER}>"
+
+
+EXTRA_SETTINGS_ADMIN_APP = "extra_settings"
+EXTRA_SETTINGS_CACHE_NAME = "extra_settings"
+EXTRA_SETTINGS_VERBOSE_NAME = "Настройки"
+EXTRA_SETTINGS_DEFAULTS = [
+    {
+        "name": "ADDRESS",
+        "description": "Адрес организации, отображаемый в разделе контактов",
+        "type": "string",
+        "value": "г. Москва, м. Маяковская"
+    },
+    {
+        "name": "EMAIL",
+        "description": "Адрес электронной почты, отображаемый в разделе контактов",
+        "type": "string",
+        "value": "email@example.ru"
+    },
+    {
+        "name": "TELEGRAM",
+        "description": "Аккаунт, отображаемый в разделе контактов",
+        "type": "string",
+        "value": "@example"
+    },
+    {
+        "name": "WHATSAPP",
+        "description": "Номер телефона WhatsApp, отображаемый в разделе контактов",
+        "type": "string",
+        "value": "8 (800) 555-35-35"
+    },
+]

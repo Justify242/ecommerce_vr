@@ -293,7 +293,7 @@ ul {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1590px;
+  max-width: 1450px;
 }
 
 .hero-text {
@@ -838,6 +838,12 @@ ul {
   font-weight: 500;
   font-size: 24px;
   color: #0a0a0a;
+}
+
+@media (min-width: 1730px) {
+  .hero-content {
+    max-width: 1590px;
+  }
 }
 
 @media (max-width: 1199px) {

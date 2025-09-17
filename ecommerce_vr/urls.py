@@ -19,6 +19,10 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+admin.site.site_header = "Арт-Цех"
+admin.site.site_title = "Админ-панель проекта"
+admin.site.index_title = "Добро пожаловать в панель управления"
+
 urlpatterns = [
     path("jet/", include("jet.urls", "jet")),  # основные стили
     path("jet/dashboard/", include("jet.dashboard.urls", "jet-dashboard")),

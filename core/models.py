@@ -1,5 +1,7 @@
 import re
 
+from unidecode import unidecode
+
 from django.db import models
 from ckeditor.fields import RichTextField
 
@@ -30,6 +32,7 @@ class Technology(TimeBasedModel):
 
     @staticmethod
     def _slugify(text):
+        text = unidecode(text)
         return re.sub(r"\W+", "-", text.lower()).strip("-")
 
     @property
@@ -51,7 +54,7 @@ class Order(TimeBasedModel):
     product_type = models.TextField(verbose_name="Тип изделия")
 
     def __str__(self):
-        return f"Заказ | {self.contact}"
+        return f"Заказ | {self.full_name} | {self.contact}"
 
     class Meta:
         verbose_name = "Заказ"
