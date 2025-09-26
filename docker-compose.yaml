@@ -8,6 +8,7 @@ services:
     volumes:
       - /opt/share/nginx.conf:/etc/nginx/nginx.conf
       - /opt/share/static:/usr/share/nginx/html
+      - /opt/share/media:/usr/share/nginx/media
     networks:
       - webnet
 

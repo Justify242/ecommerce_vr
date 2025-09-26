@@ -2,8 +2,12 @@ import re
 
 from unidecode import unidecode
 
+from django.utils.html import format_html
 from django.db import models
+
 from ckeditor.fields import RichTextField
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 
 class TimeBasedModel(models.Model):
@@ -12,6 +16,55 @@ class TimeBasedModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class Case(TimeBasedModel):
+    name = models.CharField(max_length=200, verbose_name="Наименование кейса")
+
+    @property
+    def main_image(self):
+        img = self.caseimage_set.filter(is_main=True).order_by("-id").first()
+        return img.image.url if img else None
+
+    @property
+    def data_images(self):
+        imgs = self.caseimage_set.order_by("-id")
+        urls = ", ".join([f'"{img.image.url}"' for img in imgs])
+        return f"[{urls}]"
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Кейс"
+        verbose_name_plural = "Кейсы"
+
+
+class CaseImage(TimeBasedModel):
+    case = models.ForeignKey("Case", on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="cases/images/", verbose_name="Изображение")
+    resized_image = ImageSpecField(
+        source="image",
+        # processors=[ResizeToFill(1400, 600)],
+        format='JPEG',
+        options={'quality': 60}
+    )
+    is_main = models.BooleanField(default=False, verbose_name="Основное")
+
+    def preview(self):
+        if self.image:
+            return format_html(
+                '<img src="{}" style="max-height: 200px; max-width: 250px;" />',
+                self.resized_image.url
+            )
+        return "(Нет изображения)"
+
+    def __str__(self):
+        return f"Изображение кейса | {self.case}"
+
+    class Meta:
+        verbose_name = "Изображение кейса"
+        verbose_name_plural = "Изображения кейсов"
 
 
 class FaqItem(TimeBasedModel):

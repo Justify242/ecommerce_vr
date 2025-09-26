@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const sections = document.querySelectorAll("section");
   const aboutUsCards = document.querySelectorAll(".about-us .card");
+  const casesCards = document.querySelectorAll(".cases .case-card")
   const technologiesCards = document.querySelectorAll(".technologies .card")
   const faqCards = document.querySelectorAll(".faq .card-collapse")
   const timelinePoints = document.querySelectorAll(".timeline .container")
@@ -93,6 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
   aboutUsCards.forEach((card, index) => {
     observer.observe(card);
     // Задержка для каскадного эффекта
+    card.style.transitionDelay = `${index * 0.2}s`;
+  });
+
+  casesCards.forEach((card, index) => {
+    observer.observe(card);
     card.style.transitionDelay = `${index * 0.2}s`;
   });
 
@@ -149,6 +155,13 @@ document.querySelectorAll('.card-collapse').forEach(card => {
   });
 });
 
+const btn = document.querySelector('.collapse-btn');
+const icon = btn.querySelector('.icon');
+
+btn.addEventListener('click', () => {
+  btn.classList.toggle('expanded'); // добавляем/убираем класс
+});
+
  /*
  -------------------
  Отправка формы
@@ -199,4 +212,46 @@ form.addEventListener('submit', async (e) => {
   setTimeout(() => {
     submitBtn.disabled = false;
   }, 3000);
+});
+
+const modal = document.getElementById('caseModal');
+const modalImg = modal.querySelector('.carousel-image');
+const closeBtn = modal.querySelector('.close');
+const prevBtn = modal.querySelector('.prev');
+const nextBtn = modal.querySelector('.next');
+
+let currentImages = [];
+let currentIndex = 0;
+
+// Открытие модалки
+document.querySelectorAll('.case-card').forEach(card => {
+  card.addEventListener('click', () => {
+    currentImages = JSON.parse(card.dataset.images);
+    currentIndex = 0;
+    modalImg.src = currentImages[currentIndex];
+    modal.classList.add('show'); // добавляем класс show для плавного появления
+  });
+});
+
+// Закрытие модалки
+closeBtn.addEventListener('click', () => {
+  modal.classList.remove('show');
+});
+
+// Кнопки навигации
+prevBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+  modalImg.src = currentImages[currentIndex];
+});
+
+nextBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % currentImages.length;
+  modalImg.src = currentImages[currentIndex];
+});
+
+// Закрытие при клике вне модалки
+window.addEventListener('click', e => {
+  if (e.target === modal) {
+    modal.classList.remove('show');
+  }
 });

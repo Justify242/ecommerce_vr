@@ -5,6 +5,13 @@ from core.models import Order
 
 
 class OrderForm(forms.ModelForm):
+    count = forms.IntegerField(
+        initial=None,
+        widget=forms.NumberInput(
+            attrs={"class": "control"}
+        )
+    )
+
     class Meta:
         model = Order
         fields = [
@@ -17,5 +24,4 @@ class OrderForm(forms.ModelForm):
             "full_name": forms.TextInput(attrs={"class": "control"}),
             "contact": forms.TextInput(attrs={"class": "control"}),
             "product_type": forms.TextInput(attrs={"class": "control"}),
-            "count": forms.TextInput(attrs={"class": "control", "min": 0}),
         }

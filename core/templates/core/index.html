@@ -8,7 +8,7 @@
       <p class="hero-text">
         качественно <span class="newline">и под ключ</span>
       </p>
-      <button class="hero-btn">Заказать</button>
+      <a class="hero-btn" href="#order">Заказать</a>
     </div>
   </section>
 
@@ -85,13 +85,20 @@
 
   <section id="slogan-blue" class="slogan-blue">
     <div class="slogan-blue-text">
-      Мы делаем все: от создания дизайна<span class="newline">до печати и пошива</span>
+      Мы делаем все: от&nbsp;создания дизайна<span class="newline">до&nbsp;печати и&nbsp;пошива</span>
     </div>
   </section>
 
   <section id="cases" class="cases">
     <h1>кейсы</h1>
     <div class="section-content">
+      <div class="cases-row">
+        {% for case in cases %}
+        <div class="case-card" style="background-image: url('{{ case.main_image }}')" data-images='{{ case.data_images }}'>
+          <h2>{{ case.name }}</h2>
+        </div>
+        {% endfor %}
+      </div>
     </div>
   </section>
 
@@ -102,7 +109,7 @@
           <h1 style="margin-bottom: 25px">каталог</h1>
           <div class="row">
             <div class="column">
-              <h2 style="margin-bottom: 15px">Одежда</h2>
+              <h2>Одежда</h2>
               <ul>
                 <li>Футболки и поло</li>
                 <li>Куртки, бомберы, жилетки</li>
@@ -112,7 +119,7 @@
               </ul>
             </div>
             <div class="column">
-              <h2 style="margin-bottom: 15px">Аксессуары</h2>
+              <h2>Аксессуары</h2>
               <ul>
                 <li>Футболки и поло</li>
                 <li>Куртки, бомберы, жилетки</li>
@@ -124,7 +131,7 @@
           </div>
         </div>
         <div class="column">
-          <h2 style="margin-bottom: 15px">Для мероприятий</h2>
+          <h2>Для мероприятий</h2>
           <ul>
             <li>Бейджи с фирменными ланьярдами</li>
             <li>Папки с индивидуальным дизайном</li>
@@ -163,24 +170,16 @@
         </div>
       {% endif %}
       {% endfor %}
-      {#      <div class="row">#}
-      {#        {% for technology in technologies %}#}
-      {#          <div class="card {% if forloop.counter == 1 %}active{% endif %}" data-target="{{ technology.slug }}">#}
-      {#            <div class="card-content">#}
-      {#              {{ technology.name }}#}
-      {#            </div>#}
-      {#          </div>#}
-      {#        {% endfor %}#}
-      {#      </div>#}
-
       <div class="row-extra active">
         {% for technology in technologies %}
           <div id="{{ technology.slug }}" class="tab-content {% if forloop.counter == 1 %}active{% endif %}">
-            <div class="column">
-              <h2>{{ technology.name }}</h2>
-            </div>
-            <div class="column">
-              {{ technology.description|safe }}
+            <div class="row">
+              <div class="column">
+                <h2>{{ technology.name }}</h2>
+              </div>
+              <div class="column">
+                {{ technology.description|safe }}
+              </div>
             </div>
           </div>
         {% endfor %}
@@ -234,7 +233,6 @@
         <div class="container">
           <div class="content">
             <h4>Изготовление заказа и доставка</h4>
-            {#            <p></p>#}
           </div>
         </div>
       </div>
@@ -312,7 +310,18 @@
       </div>
     </div>
   </section>
-
+  
+  <div class="modal" id="caseModal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="carousel">
+      <button class="prev">&#10094;</button>
+      <img src="" alt="case image" class="carousel-image">
+      <button class="next">&#10095;</button>
+    </div>
+  </div>
+</div>
+  
 {% endblock %}
 
 
