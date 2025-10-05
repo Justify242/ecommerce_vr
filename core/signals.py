@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 from core import models
@@ -11,3 +11,8 @@ def handle_order_post_save(sender, instance, created, **kwargs):
         return
 
     send_email_worker(instance.id)
+
+
+@receiver(pre_save, sender=models.Technology)
+def handle_technology_pre_save(sender, instance, **kwargs):
+    instance.name = instance.name.replace("-", "\u2011")

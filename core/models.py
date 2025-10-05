@@ -102,12 +102,13 @@ class Technology(TimeBasedModel):
 
 class Order(TimeBasedModel):
     full_name = models.CharField(max_length=200, verbose_name="ФИО пользователя")
-    contact = models.CharField(max_length=100, verbose_name="Контакт пользователя")
-    count = models.PositiveIntegerField(verbose_name="Тираж", default=0)
-    product_type = models.TextField(verbose_name="Тип изделия")
+    phone = models.CharField(max_length=20, verbose_name="Номер телефона")
+    email = models.EmailField(verbose_name="Почта")
+    telegram = models.CharField(max_length=100, verbose_name="Ник в Telegram")
+    description = models.TextField(verbose_name="Комментарий к заказу", blank=True)
 
     def __str__(self):
-        return f"Заказ | {self.full_name} | {self.contact}"
+        return f"Заказ | {self.full_name} | {self.phone} | {self.email} | {self.telegram}"
 
     class Meta:
         verbose_name = "Заказ"

@@ -150,16 +150,13 @@ document.querySelectorAll('.card-collapse').forEach(card => {
 
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
+
+    // переключаем класс expanded на кнопке
+    btn.classList.toggle('expanded');
+
+    // можно переключать класс на самой карточке, если нужно
     card.classList.toggle('expanded');
-    icon.src = card.classList.contains('expanded') ? '/static/assets/cross.png' : '/static/assets/cross.png';
   });
-});
-
-const btn = document.querySelector('.collapse-btn');
-const icon = btn.querySelector('.icon');
-
-btn.addEventListener('click', () => {
-  btn.classList.toggle('expanded'); // добавляем/убираем класс
 });
 
  /*
@@ -219,6 +216,7 @@ const modalImg = modal.querySelector('.carousel-image');
 const closeBtn = modal.querySelector('.close');
 const prevBtn = modal.querySelector('.prev');
 const nextBtn = modal.querySelector('.next');
+const dotsContainer = modal.querySelector('.carousel-dots');
 
 let currentImages = [];
 let currentIndex = 0;
@@ -229,29 +227,37 @@ document.querySelectorAll('.case-card').forEach(card => {
     currentImages = JSON.parse(card.dataset.images);
     currentIndex = 0;
     modalImg.src = currentImages[currentIndex];
-    modal.classList.add('show'); // добавляем класс show для плавного появления
+    modal.classList.add('show');
+
+    // Создаём точки
+    dotsContainer.innerHTML = '';
+    currentImages.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => showImage(i));
+      dotsContainer.appendChild(dot);
+    });
   });
 });
 
-// Закрытие модалки
-closeBtn.addEventListener('click', () => {
-  modal.classList.remove('show');
-});
-
-// Кнопки навигации
-prevBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+// Показ изображения и обновление точек
+function showImage(index) {
+  currentIndex = index;
   modalImg.src = currentImages[currentIndex];
+  const dots = dotsContainer.querySelectorAll('.dot');
+  dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+}
+
+// Навигация
+prevBtn.addEventListener('click', () => {
+  showImage((currentIndex - 1 + currentImages.length) % currentImages.length);
 });
 
 nextBtn.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % currentImages.length;
-  modalImg.src = currentImages[currentIndex];
+  showImage((currentIndex + 1) % currentImages.length);
 });
 
-// Закрытие при клике вне модалки
-window.addEventListener('click', e => {
-  if (e.target === modal) {
-    modal.classList.remove('show');
-  }
-});
+// Закрытие модалки
+closeBtn.addEventListener('click', () => modal.classList.remove('show'));
+window.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('show'); });

@@ -5,23 +5,20 @@ from core.models import Order
 
 
 class OrderForm(forms.ModelForm):
-    count = forms.IntegerField(
-        initial=None,
-        widget=forms.NumberInput(
-            attrs={"class": "control"}
-        )
-    )
 
     class Meta:
         model = Order
         fields = [
             "full_name",
-            "contact",
-            "count",
-            "product_type",
+            "phone",
+            "email",
+            "telegram",
+            "description",
         ]
         widgets = {
             "full_name": forms.TextInput(attrs={"class": "control"}),
-            "contact": forms.TextInput(attrs={"class": "control"}),
-            "product_type": forms.TextInput(attrs={"class": "control"}),
+            "phone": forms.TextInput(attrs={"class": "control"}),
+            "email": forms.TextInput(attrs={"class": "control"}),
+            "telegram": forms.TextInput(attrs={"class": "control"}),
+            "description": forms.TextInput(attrs={"class": "control"}),
         }

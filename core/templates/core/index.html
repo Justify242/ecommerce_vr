@@ -19,8 +19,9 @@
   </section>
 
   <section id="about-us" class="about-us">
-    <h1>о нас</h1>
+
     <div class="section-content">
+      <h1>о нас</h1>
       <div class="row">
         <div class="text">
           <p>
@@ -90,13 +91,14 @@
   </section>
 
   <section id="cases" class="cases">
-    <h1>кейсы</h1>
     <div class="section-content">
+      <h1>кейсы</h1>
       <div class="cases-row">
         {% for case in cases %}
-        <div class="case-card" style="background-image: url('{{ case.main_image }}')" data-images='{{ case.data_images }}'>
-          <h2>{{ case.name }}</h2>
-        </div>
+          <div class="case-card" style="background-image: url('{{ case.main_image }}')"
+               data-images='{{ case.data_images }}'>
+            <h2>{{ case.name }}</h2>
+          </div>
         {% endfor %}
       </div>
     </div>
@@ -104,76 +106,83 @@
 
   <section id="catalog" class="catalog">
     <div class="section-content">
-      <div class="row">
-        <div class="column">
-          <h1 style="margin-bottom: 25px">каталог</h1>
-          <div class="row">
-            <div class="column">
-              <h2>Одежда</h2>
-              <ul>
-                <li>Футболки и поло</li>
-                <li>Куртки, бомберы, жилетки</li>
-                <li>Дождевики</li>
-                <li>Бейсболки</li>
-                <li>Шевроны</li>
-              </ul>
+      <div class="content-wrapper">
+        <div class="row">
+
+          <div class="column">
+            <h1 style="margin-bottom: 25px">каталог</h1>
+
+
+            <div class="row">
+              <div class="column">
+                <h2>Одежда</h2>
+                <ul>
+                  <li>Футболки и поло</li>
+                  <li>Куртки, бомберы, жилетки</li>
+                  <li>Дождевики</li>
+                  <li>Бейсболки</li>
+                  <li>Шевроны</li>
+                </ul>
+              </div>
+              <div class="column">
+                <h2>Аксессуары</h2>
+                <ul>
+                  <li>Футболки и поло</li>
+                  <li>Куртки, бомберы, жилетки</li>
+                  <li>Дождевики</li>
+                  <li>Бейсболки</li>
+                  <li>Шевроны</li>
+                </ul>
+              </div>
             </div>
-            <div class="column">
-              <h2>Аксессуары</h2>
-              <ul>
-                <li>Футболки и поло</li>
-                <li>Куртки, бомберы, жилетки</li>
-                <li>Дождевики</li>
-                <li>Бейсболки</li>
-                <li>Шевроны</li>
-              </ul>
-            </div>
+
           </div>
-        </div>
-        <div class="column">
-          <h2>Для мероприятий</h2>
-          <ul>
-            <li>Бейджи с фирменными ланьярдами</li>
-            <li>Папки с индивидуальным дизайном</li>
-            <li>Кружки</li>
-            <li>Флешки</li>
-            <li>Флаги под флагшток, парусный флаг</li>
-            <li>Ролл-апы, пресс-волы</li>
-            <li>Картины на пенокартоне</li>
-            <li>КУБы ПВХ с закатанной пленкой</li>
-            <li>Пакеты</li>
-            <li>Пластиковые карты</li>
-            <li>Пледы</li>
-            <li>Листовки, конверты, таблички, открытки</li>
-            <li>Эпоксидные наклейки</li>
-          </ul>
+          <div class="column">
+            <h2>Для мероприятий</h2>
+            <ul>
+              <li>Бейджи с фирменными ланьярдами</li>
+              <li>Папки с индивидуальным дизайном</li>
+              <li>Кружки</li>
+              <li>Флешки</li>
+              <li>Флаги под флагшток, парусный флаг</li>
+              <li>Ролл-апы, пресс-волы</li>
+              <li>Картины на пенокартоне</li>
+              <li>КУБы ПВХ с закатанной пленкой</li>
+              <li>Пакеты</li>
+              <li>Пластиковые карты</li>
+              <li>Пледы</li>
+              <li>Листовки, конверты, таблички, открытки</li>
+              <li>Эпоксидные наклейки</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <section id="technologies" class="technologies">
-    <h1>технологии нанесения</h1>
     <div class="section-content">
-      {% for technology in technologies %}
-        {% if forloop.first or forloop.counter0|divisibleby:4 %}
-          <div class="row">
-        {% endif %}
+      <h1>технологии нанесения</h1>
 
-      <div class="card {% if forloop.counter == 1 %}active{% endif %}" data-target="{{ technology.slug }}">
-        <div class="card-content">
-          {{ technology.name }}
-        </div>
-      </div>
-
-      {% if forloop.counter|divisibleby:4 or forloop.last %}
-        </div>
-      {% endif %}
-      {% endfor %}
-      <div class="row-extra active">
+      <div class="content-wrapper">
         {% for technology in technologies %}
-          <div id="{{ technology.slug }}" class="tab-content {% if forloop.counter == 1 %}active{% endif %}">
+          {% if forloop.first or forloop.counter0|divisibleby:4 %}
             <div class="row">
+          {% endif %}
+
+        <div class="card {% if forloop.counter == 1 %}active{% endif %}" data-target="{{ technology.slug }}">
+          <div class="card-content">
+            {{ technology.name }}
+          </div>
+        </div>
+
+        {% if forloop.counter|divisibleby:4 or forloop.last %}
+          </div>
+        {% endif %}
+        {% endfor %}
+        <div class="row-extra active">
+          {% for technology in technologies %}
+            <div id="{{ technology.slug }}" class="tab-content {% if forloop.counter == 1 %}active{% endif %}">
               <div class="column">
                 <h2>{{ technology.name }}</h2>
               </div>
@@ -181,58 +190,60 @@
                 {{ technology.description|safe }}
               </div>
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
       </div>
     </div>
-
   </section>
 
   <section id="stages" class="stages">
-    <h1>этапы</h1>
-    <h3>формирования заказа</h3>
     <div class="section-content">
-      <div class="timeline">
-        <div class="container">
-          <div class="content">
-            <h4>Заполнение заявки</h4>
-            <p>
-              В течение 2-х часов после заполнения заявки с вами свяжется менеджер
-              для уточнения деталей.
-              <span class="newline">В будни с 10:00 до 19:00 по МСК.</span>
-            </p>
+      <h1>этапы</h1>
+      <h3>формирования заказа</h3>
+
+      <div class="content-wrapper">
+        <div class="timeline">
+          <div class="container">
+            <div class="content">
+              <h4>Заполнение заявки</h4>
+              <p>
+                В течение 2-х часов после заполнения заявки с вами свяжется менеджер
+                для уточнения деталей.
+                <span class="newline">В будни с 10:00 до 19:00 по МСК.</span>
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="container">
-          <div class="content">
-            <h4>Обсуждение технического задания, просчет необходимых позиций</h4>
-            <p></p>
+          <div class="container">
+            <div class="content">
+              <h4>Обсуждение технического задания, просчет необходимых позиций</h4>
+              <p></p>
+            </div>
           </div>
-        </div>
-        <div class="container">
-          <div class="content">
-            <h4>Подготовка макета</h4>
-            <p>
-              При необходимости возможно привлечение дизайнера к
-              редактированию вашего макета под требования ТЗ.
-            </p>
+          <div class="container">
+            <div class="content">
+              <h4>Подготовка макета</h4>
+              <p>
+                При необходимости возможно привлечение дизайнера к
+                редактированию вашего макета под требования ТЗ.
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="container">
-          <div class="content">
-            <h4>Согласование ТЗ и сметы</h4>
-            <p></p>
+          <div class="container">
+            <div class="content">
+              <h4>Согласование ТЗ и сметы</h4>
+              <p></p>
+            </div>
           </div>
-        </div>
-        <div class="container">
-          <div class="content">
-            <h4>Оплата</h4>
-            <p></p>
+          <div class="container">
+            <div class="content">
+              <h4>Оплата</h4>
+              <p></p>
+            </div>
           </div>
-        </div>
-        <div class="container">
-          <div class="content">
-            <h4>Изготовление заказа и доставка</h4>
+          <div class="container">
+            <div class="content">
+              <h4>Изготовление заказа и доставка</h4>
+            </div>
           </div>
         </div>
       </div>
@@ -240,88 +251,124 @@
   </section>
 
   <section id="order" class="order">
-    <h1>заказать</h1>
     <div class="section-content">
-      <form id="formOrder" class="form-order" action="/new-order/" method="post">
-        {% csrf_token %}
-        <div class="form-item">
-          {{ form.full_name }}
-          <label for="fullname">Ваше имя</label>
-        </div>
-        <div class="form-item">
-          {{ form.contact }}
-          <label for="contact">Телефон, почта, ник в Telegram</label>
-        </div>
-        <div class="form-item">
-          {{ form.product_type }}
-          <label for="productType">Тип изделия</label>
-        </div>
-        <div class="form-item">
-          {{ form.count }}
-          <label for="count">Тираж</label>
-        </div>
-        <button type="submit" id="submitBtn" class="order-btn">Отправить</button>
-        <button type="submit" id="submitBtn" class="order-btn-burger">Отправить</button>
-      </form>
-      <div id="formAlert" style="display:none; margin-top:25px;"></div>
+      <h1>заказать</h1>
+      <div class="content-wrapper">
+        <form id="formOrder" class="form-order" action="/new-order/" method="post">
+          {% csrf_token %}
+          <div class="form-item">
+            {{ form.full_name }}
+            <label for="fullname">
+              Ваше имя
+              {% if form.full_name.field.required  %}
+                <span style="color:#d9534f">*</span>
+              {% endif %}
+            </label>
+          </div>
+          <div class="form-item">
+            {{ form.phone }}
+            <label for="phone">
+              Телефон
+              {% if form.phone.field.required %}
+                <span style="color:#d9534f">*</span>
+              {% endif %}
+            </label>
+          </div>
+          <div class="form-item">
+            {{ form.email }}
+            <label for="email">
+              Электронная почта
+              {% if form.email.field.required  %}
+                <span style="color:#d9534f">*</span>
+              {% endif %}
+            </label>
+          </div>
+          <div class="form-item">
+            {{ form.telegram }}
+            <label for="telegram">
+              Ник в Telegram
+              {% if form.telegram.field.required  %}
+                <span style="color:#d9534f">*</span>
+              {% endif %}
+            </label>
+          </div>
+          <div class="form-item">
+            {{ form.description }}
+            <label for="description">
+              Комментарий к заказу
+              {% if form.description.field.required  %}
+                <span style="color:#d9534f">*</span>
+              {% endif %}
+            </label>
+          </div>
+          <button type="submit" id="submitBtn" class="order-btn">Отправить</button>
+          <button type="submit" id="submitBtn" class="order-btn-burger">Отправить</button>
+        </form>
+        <div id="formAlert" style="display:none; margin-top:25px;"></div>
+      </div>
     </div>
   </section>
 
   <section id="faq" class="faq">
-    <h1>ответы</h1>
-    <h3>на часто задаваемые вопросы</h3>
     <div class="section-content">
-      {% for faq_item in faq_items %}
-        <div class="card-collapse">
-          <div class="card-title">
-            {{ faq_item.title }}
-            <button class="collapse-btn">
-              <img src="{% static 'assets/cross.png' %}" alt="toggle" class="icon">
-            </button>
+      <h1>ответы</h1>
+      <h3>на часто задаваемые вопросы</h3>
+      <div class="content-wrapper">
+        {% for faq_item in faq_items %}
+          <div class="card-collapse">
+            <div class="card-title">
+              {{ faq_item.title }}
+              <button class="collapse-btn">
+                <img src="{% static 'assets/cross.png' %}" alt="toggle" class="icon">
+              </button>
+            </div>
+            <div class="card-content">
+              <p>{{ faq_item.text|safe }}</p>
+            </div>
           </div>
-          <div class="card-content">
-            <p>{{ faq_item.text|safe }}</p>
-          </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
   </section>
 
   <section id="contacts" class="contacts">
-    <h1>контакты</h1>
     <div class="section-content">
-      <div class="contacts-container">
-        <div class="item">
-          <img src="{% static 'assets/map.svg' %}" alt="Phone" class="icon">
-          <span class="text">{{ address }}</span>
-        </div>
-        <div class="item">
-          <img src="{% static 'assets/mail.svg' %}" alt="Email" class="icon">
-          <span class="text">{{ email }}</span>
-        </div>
-        <div class="item">
-          <img src="{% static 'assets/telegram.svg' %}" alt="Address" class="icon">
-          <span class="text">{{ telegram }}</span>
-        </div>
-        <div class="item">
-          <img src="{% static 'assets/wa.svg' %}" alt="Address" class="icon">
-          <span class="text">{{ whatsapp }}</span>
+      <h1>контакты</h1>
+      <div class="content-wrapper">
+        <div class="contacts-container">
+          <div class="item">
+            <img src="{% static 'assets/map.svg' %}" alt="Phone" class="icon">
+            <span class="text">{{ address }}</span>
+          </div>
+          <div class="item">
+            <img src="{% static 'assets/mail.svg' %}" alt="Email" class="icon">
+            <span class="text">{{ email }}</span>
+          </div>
+          <div class="item">
+            <img src="{% static 'assets/telegram.svg' %}" alt="Address" class="icon">
+            <span class="text">{{ telegram }}</span>
+          </div>
+          <div class="item">
+            <img src="{% static 'assets/wa.svg' %}" alt="Address" class="icon">
+            <span class="text">{{ whatsapp }}</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
-  
+
   <div class="modal" id="caseModal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div class="carousel">
-      <button class="prev">&#10094;</button>
-      <img src="" alt="case image" class="carousel-image">
-      <button class="next">&#10095;</button>
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="carousel">
+        <button class="prev">&#10094;</button>
+        <img src="" alt="case image" class="carousel-image">
+        <button class="next">&#10095;</button>
+        <div class="carousel-dots"></div>
+      </div>
     </div>
   </div>
-</div>
-  
+
 {% endblock %}
 
 
