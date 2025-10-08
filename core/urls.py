@@ -9,7 +9,7 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path('index/', index, name="index"),
+    path('', index, name="index"),
     path('new-order/', new_order, name="new_order"),
 
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"),

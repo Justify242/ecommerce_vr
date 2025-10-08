@@ -65,7 +65,7 @@
         </div>
         <div class="card">
           <div class="card-title">
-            удобство
+            Удобство
           </div>
           <div class="card-content">
             Можно выбрать удобный способ оплаты и доставки
@@ -93,14 +93,23 @@
   <section id="cases" class="cases">
     <div class="section-content">
       <h1>кейсы</h1>
-      <div class="cases-row">
-        {% for case in cases %}
-          <div class="case-card" style="background-image: url('{{ case.main_image }}')"
-               data-images='{{ case.data_images }}'>
-            <h2>{{ case.name }}</h2>
+      <div class="content-wrapper">
+        <div class="cases-wrapper">
+          <button class="scroll-btn up">&uarr;</button>
+          <div class="cases-row-container">
+            <div class="cases-row">
+              {% for case in cases %}
+                <div class="case-card" style="background-image: url('{{ case.main_image }}')"
+                     data-images='{{ case.data_images }}'>
+                  <h2>{{ case.name }}</h2>
+                </div>
+              {% endfor %}
+            </div>
           </div>
-        {% endfor %}
+        <button class="scroll-btn down">&darr;</button>
+        </div>
       </div>
+    
     </div>
   </section>
 
@@ -260,7 +269,7 @@
             {{ form.full_name }}
             <label for="fullname">
               Ваше имя
-              {% if form.full_name.field.required  %}
+              {% if form.full_name.field.required %}
                 <span style="color:#d9534f">*</span>
               {% endif %}
             </label>
@@ -278,7 +287,7 @@
             {{ form.email }}
             <label for="email">
               Электронная почта
-              {% if form.email.field.required  %}
+              {% if form.email.field.required %}
                 <span style="color:#d9534f">*</span>
               {% endif %}
             </label>
@@ -287,7 +296,7 @@
             {{ form.telegram }}
             <label for="telegram">
               Ник в Telegram
-              {% if form.telegram.field.required  %}
+              {% if form.telegram.field.required %}
                 <span style="color:#d9534f">*</span>
               {% endif %}
             </label>
@@ -296,7 +305,16 @@
             {{ form.description }}
             <label for="description">
               Комментарий к заказу
-              {% if form.description.field.required  %}
+              {% if form.description.field.required %}
+                <span style="color:#d9534f">*</span>
+              {% endif %}
+            </label>
+          </div>
+          <div class="form-item">
+            {{ form.privacy_terms_accepted }}
+            <label for="privacy_terms_accepted">
+              Согласен с политикой конфиденциальности
+              {% if form.privacy_terms_accepted.field.required %}
                 <span style="color:#d9534f">*</span>
               {% endif %}
             </label>

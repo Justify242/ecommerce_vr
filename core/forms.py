@@ -14,6 +14,7 @@ class OrderForm(forms.ModelForm):
             "email",
             "telegram",
             "description",
+            "privacy_terms_accepted"
         ]
         widgets = {
             "full_name": forms.TextInput(attrs={"class": "control"}),
@@ -21,4 +22,5 @@ class OrderForm(forms.ModelForm):
             "email": forms.TextInput(attrs={"class": "control"}),
             "telegram": forms.TextInput(attrs={"class": "control"}),
             "description": forms.TextInput(attrs={"class": "control"}),
+            "privacy_terms_accepted": forms.CheckboxInput(attrs={"class": "checkbox-control", "required": True}),
         }

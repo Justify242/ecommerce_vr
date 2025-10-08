@@ -464,6 +464,22 @@ ul {
   /*min-height: 65vh;*/
 }
 
+.cases-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-height: 800px; /* ограничение по высоте видимой области */
+}
+
+.cases-row-container {
+  overflow: hidden;
+  width: 100%;
+  scroll-behavior: smooth;
+}
+
+
 .cases-row {
   display: flex;
   flex-wrap: wrap;
@@ -472,10 +488,11 @@ ul {
 }
 
 .case-card {
-  flex: 0 0 33.333%;
+  /*flex: 0 0 24%;*/
+  flex: 1 1 calc(25% - 15px);
   color: #fff;
   opacity: 0;
-  max-width: 24%;
+  /*max-width: 24%;*/
   height: 250px;
   display: flex;
   align-items: center;
@@ -516,6 +533,23 @@ ul {
   margin: 0;
   position: relative;
   z-index: 1;
+}
+
+.scroll-btn {
+  background-color: #00000088;
+  border: none;
+  color: white;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0; /* важно убрать */
+  line-height: 1; /* важно */
+  margin: 10px 0;
 }
 
 .modal {
@@ -878,6 +912,10 @@ ul {
 
 .order .form-order .form-item {
   margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* центрирует по горизонтали */
+  gap: 10px; /* расстояние между чекбоксом и текстом */
 }
 
 .order .form-order .form-item .control {
@@ -900,6 +938,38 @@ ul {
   outline: none;
   border-bottom: 2px solid #2f4763;
 }
+
+.order .form-order .form-item .checkbox-control {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #2f4763;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.order .form-order .form-item .checkbox-control:checked {
+  background-color: #2f4763;
+  border-color: #2f4763;
+}
+
+.order .form-order .form-item .checkbox-control:checked::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
 
 .order .form-order .form-item label {
   font-family: Inter_18pt, sans-serif;

@@ -10,7 +10,7 @@ from core.models import Technology, FaqItem, Case
 def index(request):
     technologies = Technology.objects.order_by("id")
     faq_items = FaqItem.objects.order_by("id")
-    cases = Case.objects.order_by("id").prefetch_related("caseimage_set")
+    cases = Case.objects.filter(is_published=True).order_by("id").prefetch_related("caseimage_set")
 
     form = OrderForm()
     context = {
@@ -21,7 +21,9 @@ def index(request):
         "address": Setting.get("ADDRESS", "г. Москва"),
         "email": Setting.get("EMAIL", "email@example.ru"),
         "telegram": Setting.get("TELEGRAM", "@example"),
-        "whatsapp": Setting.get("WHATSAPP", "8 (800) 555-35-35")
+        "whatsapp": Setting.get("WHATSAPP", "8 (800) 555-35-35"),
+        "private_terms_file": Setting.get("PRIVATE_TERMS_FILE", ""),
+        "public_offer_file": Setting.get("PUBLIC_OFFER_FILE", ""),
     }
 
     return render(request, template_name="core/index.html", context=context)
@@ -35,4 +37,9 @@ def new_order(request):
         form.save()
         return JsonResponse({"detail": "ok"}, status=200)
 
-    return JsonResponse({"detail": "failed"}, status=400)
+    errors = []
+    for field, error_list in form.errors.items():
+        for error in error_list:
+            errors.append(error)
+
+    return JsonResponse({"detail": "\n".join(errors)}, status=400)

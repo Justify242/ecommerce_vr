@@ -4,6 +4,7 @@ from unidecode import unidecode
 
 from django.utils.html import format_html
 from django.db import models
+from django.core.exceptions import ValidationError
 
 from ckeditor.fields import RichTextField
 from imagekit.models import ImageSpecField
@@ -20,6 +21,7 @@ class TimeBasedModel(models.Model):
 
 class Case(TimeBasedModel):
     name = models.CharField(max_length=200, verbose_name="Наименование кейса")
+    is_published = models.BooleanField(default=True, verbose_name="Кейс опубликован")
 
     @property
     def main_image(self):
@@ -106,6 +108,17 @@ class Order(TimeBasedModel):
     email = models.EmailField(verbose_name="Почта")
     telegram = models.CharField(max_length=100, verbose_name="Ник в Telegram")
     description = models.TextField(verbose_name="Комментарий к заказу", blank=True)
+    privacy_terms_accepted = models.BooleanField(
+        default=False,
+        verbose_name="Согласен с политикой обработки данных"
+    )
+
+    def clean(self):
+        if not self.privacy_terms_accepted:
+            raise ValidationError(
+                "Для отправки заказа требуется согласиться с "
+                "условиями политики конфиденциальности"
+            )
 
     def __str__(self):
         return f"Заказ | {self.full_name} | {self.phone} | {self.email} | {self.telegram}"
