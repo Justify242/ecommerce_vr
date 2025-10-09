@@ -106,10 +106,10 @@
               {% endfor %}
             </div>
           </div>
-        <button class="scroll-btn down">&darr;</button>
+          <button class="scroll-btn down">&darr;</button>
         </div>
       </div>
-    
+
     </div>
   </section>
 
@@ -313,7 +313,7 @@
           <div class="form-item">
             {{ form.privacy_terms_accepted }}
             <label for="privacy_terms_accepted">
-              Согласен с политикой конфиденциальности
+              Согласен с <a href="{{ private_terms_file.url }}" target="_blank">политикой конфиденциальности</a>
               {% if form.privacy_terms_accepted.field.required %}
                 <span style="color:#d9534f">*</span>
               {% endif %}
@@ -355,20 +355,20 @@
       <div class="content-wrapper">
         <div class="contacts-container">
           <div class="item">
-            <img src="{% static 'assets/map.svg' %}" alt="Phone" class="icon">
+            <img src="{% static 'assets/map.svg' %}" alt="Address" class="icon">
             <span class="text">{{ address }}</span>
           </div>
           <div class="item">
             <img src="{% static 'assets/mail.svg' %}" alt="Email" class="icon">
-            <span class="text">{{ email }}</span>
+            <span class="text"><a href="mailto:{{ email }}">{{ email }}</a></span>
           </div>
           <div class="item">
             <img src="{% static 'assets/telegram.svg' %}" alt="Address" class="icon">
-            <span class="text">{{ telegram }}</span>
+            <span class="text"><a href="https://t.me/{{ telegram }}" target="_blank">{{ telegram }}</a></span>
           </div>
           <div class="item">
-            <img src="{% static 'assets/wa.svg' %}" alt="Address" class="icon">
-            <span class="text">{{ whatsapp }}</span>
+            <img src="{% static 'assets/wa.svg' %}" alt="WhatsApp" class="icon">
+            <span class="text"><a href="#" id="whatsappLink" data-wa-number="{{ whatsapp }}">{{ whatsapp }}</a></span>
           </div>
         </div>
       </div>
@@ -383,6 +383,24 @@
         <img src="" alt="case image" class="carousel-image">
         <button class="next">&#10095;</button>
         <div class="carousel-dots"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="whatsappConfirmModal" class="whatsapp-modal">
+    <div class="whatsapp-modal-content">
+      <h2>Перейти в WhatsApp?</h2>
+      <p>
+        Нажимая перейти в WhatsApp Вы соглашаетесь с
+        <a href="{{ private_terms_file.url }}">политикой конфиденциальности</a>
+      </p>
+      <label class="whatsapp-checkbox-label">
+        <input type="checkbox" id="whatsappAgreeCheckbox">
+        Я согласен(а)
+      </label>
+      <div class="whatsapp-modal-buttons">
+        <button id="whatsappCancelBtn">Отмена</button>
+        <button id="whatsappConfirmBtn" disabled>Перейти</button>
       </div>
     </div>
   </div>

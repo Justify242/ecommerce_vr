@@ -24,16 +24,20 @@ def send_email_worker(order_id):
 
     message = (
         f"Новый заказ\n\n"
-        f"ФИО: {order.full_name}\n"
-        f"Контакт: {order.contact}\n"
-        f"Тип изделия: {order.product_type}\n"
-        f"Тираж: {order.count}"
+        f"ФИО: {order.full_name or 'Не указано'}\n"
+        f"Контакт: {order.phone or 'Не указано'}\n"
+        f"Контакт: {order.email or 'Не указано'}\n"
+        f"Контакт: {order.telegram or 'Не указано'}\n"
+        f"Комментарий к заказу: {order.description or 'Не указано'}\n"
     )
 
-    send_mail(
-        subject="Новый заказ",
-        message=message,
-        from_email=None,
-        recipient_list=emails,
-        fail_silently=False,
-    )
+    try:
+        send_mail(
+            subject="Новый заказ",
+            message=message,
+            from_email=None,
+            recipient_list=emails,
+            fail_silently=False,
+        )
+    except Exception as exc:
+        print(exc)

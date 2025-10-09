@@ -159,11 +159,11 @@ document.querySelectorAll('.card-collapse').forEach(card => {
   });
 });
 
- /*
- -------------------
- Отправка формы
- -------------------
- */
+/*
+-------------------
+Отправка формы
+-------------------
+*/
 
 const form = document.getElementById('formOrder');
 const submitBtn = document.getElementById('submitBtn');
@@ -262,52 +262,15 @@ nextBtn.addEventListener('click', () => {
 
 // Закрытие модалки
 closeBtn.addEventListener('click', () => modal.classList.remove('show'));
-window.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('show'); });
-
-
-// const container = document.querySelector('.cases-row-container');
-// const row = document.querySelector('.cases-row');
-// const upBtn = document.querySelector('.scroll-btn.up');
-// const downBtn = document.querySelector('.scroll-btn.down');
-//
-// let scrollAmount = 0;
-// const rowHeight = 270;
-
-// function updateButtons() {
-//
-//   if (row.scrollHeight > container.clientHeight) {
-//     upBtn.style.display = scrollAmount > 0 ? 'block' : 'none';
-//     downBtn.style.display = scrollAmount + container.clientHeight < row.scrollHeight ? 'block' : 'none';
-//   } else {
-//     upBtn.style.display = 'none';
-//     downBtn.style.display = 'none';
-//   }
-// }
-//
-// upBtn.addEventListener('click', () => {
-//   scrollAmount -= rowHeight;
-//   if (scrollAmount < 0) scrollAmount = 0;
-//   row.style.transform = `translateY(-${scrollAmount}px)`;
-//   updateButtons();
-// });
-//
-// downBtn.addEventListener('click', () => {
-//   scrollAmount += rowHeight;
-//   const maxScroll = row.scrollHeight - container.clientHeight;
-//   if (scrollAmount > maxScroll) scrollAmount = maxScroll;
-//   row.style.transform = `translateY(-${scrollAmount}px)`;
-//   updateButtons();
-// });
-//
-//
-// updateButtons();
-// window.addEventListener('resize', updateButtons);
+window.addEventListener('click', e => {
+  if (e.target === modal) modal.classList.remove('show');
+});
 
 
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.cases-row-container');
-const btnUp = document.querySelector('.scroll-btn.up');
-const btnDown = document.querySelector('.scroll-btn.down');
+  const btnUp = document.querySelector('.scroll-btn.up');
+  const btnDown = document.querySelector('.scroll-btn.down');
   const rowHeight = 270; // высота строки с карточками + gap
 
   function updateButtons() {
@@ -333,4 +296,35 @@ const btnDown = document.querySelector('.scroll-btn.down');
   });
 
   container.addEventListener('scroll', updateButtons);
+});
+
+const waLink = document.getElementById('whatsappLink');
+const confirmModal = document.getElementById('whatsappConfirmModal');
+const agreeCheckbox = document.getElementById('whatsappAgreeCheckbox');
+const confirmBtn = document.getElementById('whatsappConfirmBtn');
+const cancelBtn = document.getElementById('whatsappCancelBtn');
+
+let currentNumber = '';
+
+waLink.addEventListener('click', (e) => {
+  e.preventDefault(); // блокируем переход
+  currentNumber = waLink.dataset.waNumber;
+  confirmModal.style.display = 'flex';
+  agreeCheckbox.checked = false;
+  confirmBtn.disabled = true;
+});
+
+agreeCheckbox.addEventListener('change', () => {
+  confirmBtn.disabled = !agreeCheckbox.checked;
+});
+
+confirmBtn.addEventListener('click', () => {
+  if (currentNumber) {
+    window.open(`https://wa.me/${currentNumber}`, '_blank');
+  }
+  confirmModal.style.display = 'none';
+});
+
+cancelBtn.addEventListener('click', () => {
+  confirmModal.style.display = 'none';
 });

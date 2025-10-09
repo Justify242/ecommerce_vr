@@ -106,7 +106,12 @@ class Order(TimeBasedModel):
     full_name = models.CharField(max_length=200, verbose_name="ФИО пользователя")
     phone = models.CharField(max_length=20, verbose_name="Номер телефона")
     email = models.EmailField(verbose_name="Почта")
-    telegram = models.CharField(max_length=100, verbose_name="Ник в Telegram")
+    telegram = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        verbose_name="Ник в Telegram"
+    )
     description = models.TextField(verbose_name="Комментарий к заказу", blank=True)
     privacy_terms_accepted = models.BooleanField(
         default=False,
