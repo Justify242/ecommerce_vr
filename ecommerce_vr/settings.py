@@ -218,7 +218,7 @@ EXTRA_SETTINGS_DEFAULTS = [
         "value": "8 (800) 555-35-35"
     },
     {
-        "name": "PRIVACY_TERMS_FILE",
+        "name": "PRIVATE_TERMS_FILE",
         "description": "Файл с текстом политики конфиденциальности",
         "type": "file",
         "value": None
