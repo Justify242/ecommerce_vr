@@ -12,6 +12,16 @@ def index(request):
     faq_items = FaqItem.objects.order_by("id")
     cases = Case.objects.filter(is_published=True).order_by("id").prefetch_related("caseimage_set")
 
+    telegram_raw = Setting.get("TELEGRAM", "@example").replace("@", "")
+    whatsapp_raw = (
+        Setting.get("WHATSAPP", "8 (800) 555-35-35")
+        .replace("-", "")
+        .replace("+", "")
+        .replace("(", "")
+        .replace(")", "")
+        .replace(" ", "")
+    )
+
     form = OrderForm()
     context = {
         "form": form,
@@ -21,7 +31,9 @@ def index(request):
         "address": Setting.get("ADDRESS", "г. Москва"),
         "email": Setting.get("EMAIL", "email@example.ru"),
         "telegram": Setting.get("TELEGRAM", "@example"),
+        "telegram_raw": telegram_raw,
         "whatsapp": Setting.get("WHATSAPP", "8 (800) 555-35-35"),
+        "whatsapp_raw": whatsapp_raw,
         "private_terms_file": Setting.get("PRIVATE_TERMS_FILE", ""),
         "public_offer_file": Setting.get("PUBLIC_OFFER_FILE", ""),
     }

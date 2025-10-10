@@ -230,3 +230,13 @@ EXTRA_SETTINGS_DEFAULTS = [
         "value": None
     },
 ]
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+    },
+    "extra_settings": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "TIMEOUT": 5
+    }
+}

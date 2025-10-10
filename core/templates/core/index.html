@@ -364,11 +364,15 @@
           </div>
           <div class="item">
             <img src="{% static 'assets/telegram.svg' %}" alt="Address" class="icon">
-            <span class="text"><a href="https://t.me/{{ telegram }}" target="_blank">{{ telegram }}</a></span>
+            <span class="text"><a href="https://t.me/{{ telegram_raw }}" target="_blank">{{ telegram }}</a></span>
           </div>
           <div class="item">
             <img src="{% static 'assets/wa.svg' %}" alt="WhatsApp" class="icon">
-            <span class="text"><a href="#" id="whatsappLink" data-wa-number="{{ whatsapp }}">{{ whatsapp }}</a></span>
+            <span class="text">
+              <a href="#" id="whatsappLink" data-wa-number="{{ whatsapp_raw }}">
+                {{ whatsapp }}
+              </a>
+            </span>
           </div>
         </div>
       </div>
