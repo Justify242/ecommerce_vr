@@ -171,12 +171,13 @@ CKEDITOR_CONFIGS = {
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = config.EMAIL_HOST
 EMAIL_PORT = config.EMAIL_PORT
-EMAIL_USE_TLS = True
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
 
 EMAIL_HOST_USER = config.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
 
-DEFAULT_FROM_EMAIL = f"МЕРЧ <{EMAIL_HOST_USER}>"
+# DEFAULT_FROM_EMAIL = f"МЕРЧ <{EMAIL_HOST_USER}>"
 
 HUEY = {
     'name': 'art_worker',

@@ -1,7 +1,8 @@
 import logging
 
-from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.core.mail import send_mail
+from django.utils.html import strip_tags
 
 from huey.contrib.djhuey import db_task
 
@@ -19,25 +20,26 @@ def send_email_worker(order_id):
         logger.error(f"Заказ с ID {order_id} не существует")
         return
 
-    user_model = get_user_model()
-    emails = user_model.objects.exclude(email__isnull=True).values_list("email", flat=True)
-
+    subject = f"Новый заказ {order.full_name}, {order.phone}, {order.email}"
     message = (
-        f"Новый заказ\n\n"
-        f"ФИО: {order.full_name or 'Не указано'}\n"
-        f"Контакт: {order.phone or 'Не указано'}\n"
-        f"Контакт: {order.email or 'Не указано'}\n"
-        f"Контакт: {order.telegram or 'Не указано'}\n"
-        f"Комментарий к заказу: {order.description or 'Не указано'}\n"
+        f"Новый заказ<br>"
+        f"------------------------------------------------<br>"
+        f"<b>ФИО</b>: {order.full_name or 'Не указано'}<br>"
+        f"<b>Номер телефона</b>: {order.phone or 'Не указано'}<br>"
+        f"<b>Электронная почта</b>: {order.email or 'Не указано'}<br>"
+        f"<b>Ник в Telegram</b>: {order.telegram or 'Не указано'}<br>"
+        f"------------------------------------------------<br>"
+        f"<b>Комментарий к заказу</b>: {order.description or 'Не указано'}<br>"
     )
 
     try:
         send_mail(
-            subject="Новый заказ",
-            message=message,
-            from_email=None,
-            recipient_list=emails,
+            subject=subject,
+            message=strip_tags(message),
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[settings.EMAIL_HOST_USER],
             fail_silently=False,
+            html_message=message,
         )
     except Exception as exc:
-        print(exc)
+        logger.exception(str(exc))
